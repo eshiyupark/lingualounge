@@ -10,9 +10,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_060924) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_072418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "friendships", force: :cascade do |t|
+    t.string "status"
+    t.integer "participant_one_id"
+    t.integer "participant_two_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "friendship_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friendship_id"], name: "index_messages_on_friendship_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating"
+    t.bigint "user_id", null: false
+    t.bigint "session_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_reviews_on_session_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.integer "participant_one_id"
+    t.integer "participant_two_id"
+    t.boolean "accept_one"
+    t.boolean "accept_two"
+    t.bigint "language_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id"], name: "index_sessions_on_language_id"
+  end
+
+  create_table "user_languages", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "language_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id"], name: "index_user_languages_on_language_id"
+    t.index ["user_id"], name: "index_user_languages_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +76,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_060924) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
+    t.string "first_name"
+    t.string "last_name"
+    t.date "date_of_birth"
+    t.string "gender"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "messages", "friendships"
+  add_foreign_key "messages", "users"
+  add_foreign_key "reviews", "sessions"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "sessions", "languages"
+  add_foreign_key "user_languages", "languages"
+  add_foreign_key "user_languages", "users"
 end
