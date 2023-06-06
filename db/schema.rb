@@ -16,10 +16,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_072418) do
 
   create_table "friendships", force: :cascade do |t|
     t.string "status"
-    t.integer "participant_one_id"
-    t.integer "participant_two_id"
+    t.bigint "participant_one_id", null: false
+    t.bigint "participant_two_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["participant_one_id"], name: "index_friendships_on_participant_one_id"
+    t.index ["participant_two_id"], name: "index_friendships_on_participant_two_id"
   end
 
   create_table "languages", force: :cascade do |t|
@@ -49,14 +51,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_072418) do
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.integer "participant_one_id"
-    t.integer "participant_two_id"
+    t.bigint "participant_one_id", null: false
+    t.bigint "participant_two_id", null: false
     t.boolean "accept_one"
     t.boolean "accept_two"
     t.bigint "language_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["language_id"], name: "index_sessions_on_language_id"
+    t.index ["participant_one_id"], name: "index_sessions_on_participant_one_id"
+    t.index ["participant_two_id"], name: "index_sessions_on_participant_two_id"
   end
 
   create_table "user_languages", force: :cascade do |t|
@@ -85,11 +89,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_072418) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "friendships", "users", column: "participant_one_id"
+  add_foreign_key "friendships", "users", column: "participant_two_id"
   add_foreign_key "messages", "friendships"
   add_foreign_key "messages", "users"
   add_foreign_key "reviews", "sessions"
   add_foreign_key "reviews", "users"
   add_foreign_key "sessions", "languages"
+  add_foreign_key "sessions", "users", column: "participant_one_id"
+  add_foreign_key "sessions", "users", column: "participant_two_id"
   add_foreign_key "user_languages", "languages"
   add_foreign_key "user_languages", "users"
 end

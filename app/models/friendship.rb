@@ -1,5 +1,5 @@
 class Friendship < ApplicationRecord
-  has_one :participant_one, class: 'User', foreign_key: :participant_one_id
-  has_one :participant_two, class: 'User', foreign_key: :participant_two_id
   has_many :messages
+  belongs_to :participant_one, class_name: 'User', foreign_key: 'participant_one_id', required: true
+  belongs_to :participant_two, class_name: 'User', foreign_key: 'participant_two_id', required: true
 end

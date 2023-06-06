@@ -1,6 +1,6 @@
 class Session < ApplicationRecord
-  has_one :language
-  has_one :participant_one, class: 'User', foreign_key: :participant_one_id
-  has_one :participant_two, class: 'User', foreign_key: :participant_two_id
+  belongs_to :language
   has_many :reviews
+  belongs_to :participant_one, class_name: 'User', foreign_key: 'participant_one_id', required: true
+  belongs_to :participant_two, class_name: 'User', foreign_key: 'participant_two_id', required: true
 end
