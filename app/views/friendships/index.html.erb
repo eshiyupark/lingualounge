@@ -1,0 +1,7 @@
+<h1> Your friends list </h1>
+<% @friendships_and_buddies.each do |friendship, buddy| %>
+<%= friendship %>
+<% end %>
+<%# > @friendships_and_buddies[0][:buddy]
+=> #<User id: 1, email: "johndoe@gmail.com", created_at: "2023-06-06 05:26:18.204027000 +0000", updated_at: "2023-06-06 05:26:18.204027000 +0000", username: "johndoe", first_name: "John", last_name: "Doe", date_of_birth: "1994-04-03", gender: "male">
+>> %>

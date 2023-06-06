@@ -8,8 +8,8 @@ class User < ApplicationRecord
   has_many :languages, through: :user_languages
   has_many :reviews
   has_many :messages
-  has_many :friendships, foreign_key: :participant_one, dependent: :destroy
-  has_many :inverse_friendships, class_name: "Friendship", foreign_key: :participant_two, dependent: :destroy
+  has_many :friendships_created, class_name: "Friendship", foreign_key: :participant_one, dependent: :destroy
+  has_many :friendships_received, class_name: "Friendship", foreign_key: :participant_two, dependent: :destroy
   has_many :sessions, foreign_key: :participant_one, dependent: :destroy
   has_many :inverse_sessions, class_name: "Session", foreign_key: :participant_two, dependent: :destroy
 
@@ -18,6 +18,10 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :gender, presence: true, inclusion: { in: ["male", "female", "prefer not to say"] }
   validate :validate_age
+
+  def friendships
+    friendships_created + friendships_received
+  end
 
   private
 
