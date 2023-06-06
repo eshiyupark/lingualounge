@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  post "/sessions", to: "sessions#create"
+  get "/sessions/queue", to: "sessions#queue"
+  get "/sessions/:id", to: "sessions#show", as: "session"
 end
