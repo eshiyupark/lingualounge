@@ -5,3 +5,5 @@
 <% end %>
 
 <%= link_to "Leave the queue", sessions_destroy_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+
+<p>This page needs AJAX to continuously make calls to the database to check for matching sessions</p>
