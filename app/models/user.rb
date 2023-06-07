@@ -23,6 +23,18 @@ class User < ApplicationRecord
     friendships_created + friendships_received
   end
 
+  def is_friend?(user)
+    condition1 = Friendship.where(participant_one: user, participant_two: self).exists?
+    condition2 = Friendship.where(participant_one: self, participant_two: user).exists?
+    condition1 || condition2
+  end
+
+  # def friendship_status(user)
+  #   is_friend(user)
+  #   @friendship = Friendship.find(condition1.id).or(Friendship.find(condition2.id))
+  #   return @friendship.status
+  # end
+
   private
 
   def validate_age

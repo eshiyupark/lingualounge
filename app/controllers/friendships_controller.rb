@@ -13,16 +13,13 @@ class FriendshipsController < ApplicationController
         buddy: buddy
       }
     end
-    raise
-  end
-
-  def show
-    @friendship = Friendship.find(params[:id])
   end
 
   def create
-    @friendship = Friendship.new(friendship_params)
+    @friend_id = params[:friend_id]
+    @friendship = Friendship.new(status: "pending", participant_one_id: current_user.id, participant_two_id: @friend_id)
     @friendship.save
+    redirect_to user_path(@friend_id) if @friendship.save
   end
 
   def update # refactor this so that only the status is changeable by trigger

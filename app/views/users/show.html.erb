@@ -1,1 +1,32 @@
 <h1><%= @user.first_name %>'s profile </h1>
+
+<!--already friends but want to remove-->
+<% if current_user.is_friend?(@user) %>
+  <%= current_user.friendship_status(@user) %>
+  <%= form_tag("/friendships", method: 'delete') do%>
+  <%= hidden_field_tag 'friend_id', @user.id %>
+  <%= submit_tag("Remove Friend") %>
+  <% end %>
+  <%# another else statement here for status == 'pending' %>
+<%# - person receiving the friend request can accept (part 2)
+- Person sending the friend request can cancel (i.e. destroy) (part 1)
+- person  receiving the friend request can also cancel (i.e destroy) (part 2) %>
+<% else %>
+  <%= form_tag("/friendships", method: 'post') do%>
+  <%= hidden_field_tag 'friend_id', @user.id %>
+  <%= submit_tag("Add Friend") %>
+  <% end %>
+<% end %>
+<!---->
+
+Two ways to approach this:
+1. Call an instance of the existing friendship and its status
+2. Change status to 'accept' or 'reject' and have conditional statement in controller
+i.e.
+if friendship.status == accepted
+  go to destroy
+if friendship.status == pending
+  if I sent the request - cancel (go to destroy)
+  if THEY sent the request - update (to rejected) - side note: we can change the status to rejected and this means the other person won't be able to send another request as instance of Friendship technically still exists (logic in controller precents this from happening)
+
+We can make it so that the rejected requests go to destroy
