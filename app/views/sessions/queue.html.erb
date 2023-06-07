@@ -1,9 +1,11 @@
-<h1>You are in the queue</h1>
-<h2>Looking for lounges with the following languages:</h2>
-<% @sessions.each do |session| %>
-  <p><%= session.language.name.capitalize %></p>
-<% end %>
+<div class="container" data-controller="queue-for-lounge" data-queue-for-lounge-sessions-ids-value="<%= @sessions_ids %>">
+  <h1>You are in the queue</h1>
+  <h2>Looking for lounges with the following languages:</h2>
+  <% @sessions.each do |session| %>
+    <p><%= session.language.name.capitalize %></p>
+  <% end %>
 
-<%= link_to "Leave the queue", sessions_destroy_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  <%= link_to "Leave the queue", sessions_destroy_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
 
-<p>This page needs AJAX to continuously make calls to the database to check for matching sessions</p>
+  <p>This page needs AJAX to continuously make calls to the database to check for matching sessions</p>
+</div>

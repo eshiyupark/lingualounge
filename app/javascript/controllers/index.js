@@ -6,3 +6,6 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import QueueForLoungeController from "./queue_for_lounge_controller"
+application.register("queue-for-lounge", QueueForLoungeController)
