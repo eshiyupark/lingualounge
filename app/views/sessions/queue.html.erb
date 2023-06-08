@@ -1,0 +1,14 @@
+<div class="w-100 h-100 d-flex flex-column align-items-center justify-content-start">
+  <div class="d-flex flex-column align-items-center justify-content-around h-75" data-controller="queue-for-lounge" data-queue-for-lounge-sessions-ids-value="<%= @sessions_ids %>">
+    <h1 class="text-center">Looking for a Lounge...</h1>
+    <div class="d-flex flex-column align-items-center justify-content-start">
+      <h2>Languages:</h2>
+      <% @sessions.each do |session| %>
+        <p><%= session.language.name.capitalize %></p>
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <%= link_to "Cancel", sessions_destroy_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  </div>
+</div>
