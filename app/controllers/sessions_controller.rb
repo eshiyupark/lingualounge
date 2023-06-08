@@ -28,27 +28,22 @@ class SessionsController < ApplicationController
       @sessions = current_user.sessions.where(participant_two_id: nil)
       @sessions_ids = @sessions.map(&:id).to_json
     else
+      # When the JS controller makes AJAX calls
       @sessions_ids = JSON.parse(params[:sessions_ids])
       @sessions = @sessions_ids.map { |id| Session.find(id) }
       @sessions.each do |session|
-        respond_to do |format|
-          if session.participant_two_id == nil
-            format.html { "false" }
-            format.json # Follow the classic Rails flow and look for a create.json view
-          else
-            format.html { "matched" }
-            format.json # Follow the classic Rails flow and look for a create.json view
-          end
-        end
+        @session = session if session.participant_two_id != nil
       end
     end
-    # in the js controller, connect(),
-      # create a setTimeout()
-      # that would call this route again but asking for a text response
-      # the request would also send a session_ids array through the params
-      # In the rails controller, check if any of the sessions have participant two
-      # If there is, send the html for the video call view and...
-      # in js controller, change the outerHTML to the response
+
+    respond_to do |format|
+      if @session
+        format.text { render inline: @session.id.to_s }
+      else
+        format.text { render inline: "" }
+      end
+      format.html
+    end
   end
 
   def destroy

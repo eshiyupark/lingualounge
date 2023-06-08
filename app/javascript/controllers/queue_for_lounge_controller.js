@@ -7,14 +7,17 @@ export default class extends Controller {
   }
 
   connect() {
-    setTimeout(() => {
-      fetch(`url_for_the_route?sessions_ids=${this.sessionsIdsValue}`, {
+
+    setInterval(() => {
+      fetch(`/sessions/queue?sessions_ids=${JSON.stringify(this.sessionsIdsValue)}`, {
         headers: { "Accept": "text/plain" }
       })
-        .then(response => response.json())
+        .then(response => response.text())
         .then((data) => {
           console.log(data)
-          // build out the updating of the page
+          if (data) {
+            window.location.assign(`/sessions/${data}`)
+          }
         })
     }, 6_000);
   }
