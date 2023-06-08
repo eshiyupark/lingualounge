@@ -1,0 +1,8 @@
+<h1> Your friends list </h1>
+<ol>
+  <% @friendships_and_buddies.each do |friend| %>
+    <% @user = User.find(friend[:buddy].id) %>
+    <li><%= link_to friend[:buddy].first_name + " " + friend[:buddy].last_name, user_path(@user) %>
+    Status: <%= friend[:friendship].status %></li>
+  <% end %>
+</ol>

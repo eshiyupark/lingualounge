@@ -1,0 +1,42 @@
+<h1><%= @user.first_name %>'s profile </h1>
+
+<% if current_user.is_friend?(@user) %>
+  <% status = current_user.friendship_status(@user) %>
+  <% case status %>
+    <% when 'pending' %>
+    <!-- is current user participant 1? i.e. sender of request - cancel-->
+      <p>Pending Friendship!</p>
+      <% if current_user.sent_request?(@user) %>
+        <p>I sent the request, so I can cancel!</p>
+        <%= form_tag("/friendships", method: 'delete') do%>
+        <%= hidden_field_tag 'friend_id', @user.id %>
+        <%= submit_tag("Cancel Friend Request") %>
+        <% end %>
+      <!-- is user participant 1? reject or accept (two buttons)-->
+      <% else %>
+        <!-- accept button -->
+        <%= form_tag("/friendships", method: 'patch') do%>
+        <%= hidden_field_tag 'friend_id', @user.id %>
+        <%= submit_tag("Accept Friend Request") %>
+        <% end %>
+        <!-- reject button -->
+        <%= form_tag("/friendships", method: 'delete') do%>
+        <%= hidden_field_tag 'friend_id', @user.id %>
+        <%= submit_tag("Decline Friend Request") %>
+        <% end %>
+      <% end %>
+    <% when 'accepted' %>
+      <p>Friendship active!</p>
+    <!-- remove friend button -->
+      <%= form_tag("/friendships", method: 'delete') do%>
+      <%= hidden_field_tag 'friend_id', @user.id %>
+      <%= submit_tag("Remove Friend") %>
+      <% end %>
+  <% end %>
+<!--If they are not friends already-->
+<% else %>
+  <%= form_tag("/friendships", method: 'post') do%>
+  <%= hidden_field_tag 'friend_id', @user.id %>
+  <%= submit_tag("Add Friend") %>
+  <% end %>
+<% end %>
