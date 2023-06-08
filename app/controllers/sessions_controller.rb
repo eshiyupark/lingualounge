@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
   def create
     language_ids = current_user.user_languages.map { |user_language| user_language.language.id if user_language.active? }.reject { |x| x == nil }
-    if Session.where(participant_two_id: nil).where(language_id: language_ids).blank?
+    if Session.where(participant_two_id: nil).where(language_id: language_ids).where.not(participant_one_id: current_user.id).blank?
       language_ids.each do |id|
         session = Session.new(participant_one_id: current_user.id, language_id: id)
         session.save
