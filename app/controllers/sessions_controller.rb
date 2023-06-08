@@ -1,4 +1,10 @@
 class SessionsController < ApplicationController
+
+  def show
+    @user = User.find(params[:id])
+    setup_video_call_token
+  end
+ 
   def create
     language_ids = current_user.user_languages.map { |user_language| user_language.language.id if user_language.active? }.reject { |x| x == nil }
     if Session.where(participant_two_id: nil).where(language_id: language_ids).blank?
@@ -18,9 +24,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  def show
-    @session = Session.find(params[:id])
-  end
 
   def queue
     unless params[:sessions_ids].present?
@@ -54,4 +57,18 @@ class SessionsController < ApplicationController
       # render some page with error
     end
   end
+  
+   private
+
+  def setup_video_call_token
+    # No chatting with yourself
+    return if @user == current_user
+    # raise
+    twilio = TwilioService.new
+    twilio.generate_token(current_user, @user)
+    @twilio_jwt = twilio.jwt
+    @room_id = twilio.room_id
+    # console.log(ringing(@user,@room_id))
+  end
+
 end

@@ -7,5 +7,10 @@ import { application } from "./application"
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+
+import VideoCallController from "./video_call_controller"
+application.register("video-call", VideoCallController)
+
 import QueueForLoungeController from "./queue_for_lounge_controller"
 application.register("queue-for-lounge", QueueForLoungeController)
+
