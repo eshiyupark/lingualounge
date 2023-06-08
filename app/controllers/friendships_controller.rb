@@ -22,14 +22,20 @@ class FriendshipsController < ApplicationController
     redirect_to user_path(@friend_id) if @friendship.save
   end
 
-  def update # refactor this so that only the status is changeable by trigger
-    @friendship = Friendship.find(params[:id])
-    @friendship.update(friendship_params)
+  # def show - to display all of messages between you and your friends (through friendships#show)
+  # end
+
+  def update
+    @friend_id = params[:friend_id] #participant one
+    @friendship = Friendship.where(participant_one_id: @friend_id, participant_two_id: current_user.id)[0]
+    @friendship.update(status: 'accepted', participant_one_id: @friend_id, participant_two_id: current_user.id)
   end
 
-  def destroy #if friendship.status is rejected then trigger this action
-    @friendship = Friendship.find(params[:id])
-    @friendship.destroy
+  def destroy # decline or remove
+    @friend_id = params[:friend_id]
+    @friendship1 = Friendship.where(participant_one_id: @friend_id, participant_two_id: current_user.id).first
+    @friendship2 = Friendship.where(participant_one_id: current_user.id, participant_two_id: @friend_id).first
+    @friendship1 == nil ? @friendship2.destroy : @friendship1.destroy
   end
 
   private

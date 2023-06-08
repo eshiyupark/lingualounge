@@ -29,11 +29,22 @@ class User < ApplicationRecord
     condition1 || condition2
   end
 
-  # def friendship_status(user)
-  #   is_friend(user)
-  #   @friendship = Friendship.find(condition1.id).or(Friendship.find(condition2.id))
-  #   return @friendship.status
-  # end
+  def friendship_status(friend)
+    friendship1 = Friendship.where(participant_one: friend, participant_two: self)
+    friendship2 = Friendship.where(participant_one: self, participant_two: friend)
+    if friendship1.exists?
+      friendship1[0].status
+    else
+      friendship2[0].status
+    end
+  end
+
+  def sent_request?(receiver)
+    # grab the instances of a friendship
+    sent = Friendship.where(participant_one: self, participant_two: receiver)
+    # is participant one sender? yes or no -- return boolean
+    sent.exists?
+  end
 
   private
 

@@ -3,7 +3,7 @@ class Friendship < ApplicationRecord
   belongs_to :participant_one, class_name: 'User', foreign_key: 'participant_one_id', required: true
   belongs_to :participant_two, class_name: 'User', foreign_key: 'participant_two_id', required: true
   validates :status, presence: true, inclusion: { in: ["pending", "accepted", "rejected"] }
-  validate :not_yet_friends
+  validate :not_yet_friends, on: :create
 
 
   private
