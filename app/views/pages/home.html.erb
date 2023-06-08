@@ -1,2 +1,16 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <h1>Vedio chat</h1>
+
+  <% if user_signed_in? %>
+    <h4>Friends</h4>
+    <div class="list-group">
+      <% @users.each do |user| %>
+        <% if user != current_user%>
+          <%= link_to user.first_name, vedio_path(user), class: 'list-group-item list-group-item-action' %>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <p>You need to sign in to see this content</p>
+  <% end %>
+</div>

@@ -1,0 +1,49 @@
+  <div class="container">
+      <h1><%= @user.first_name %></h1>
+
+    <div class="video-call"
+          data-controller="video-call"
+          data-video-call-access-token-value="<%= @twilio_jwt %>"
+          data-video-call-room-id-value="<%= @room_id %>"
+          data-video-call-buddy-video-width-value="640"
+          >
+
+
+    <div class="no-call" data-video-call-target="noCall">
+      <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier" %>
+    </div>
+    <div class="d-none" data-video-call-target="awaitingBuddy">
+      <%= @user.first_name %>
+      <p>connecting...</p>
+    </div>
+    <div class="d-none" data-video-call-target="connectedBuddy">
+      <p>Connected with <%= @user.first_name %>...</p>
+    </div>
+
+
+    <div data-video-call-target="buddyVideo"></div>
+    <div data-video-call-target="localVideo"></div>
+
+    <div>
+    <%= link_to '#',class: 'call-button btn-start-call',
+                    data: {
+                      action: 'click->video-call#joinCall',
+                      video_call_target: 'joinCallButton'
+                    } do %>
+          <i class="fa-solid fa-phone"></i>
+      <% end %>
+      </div>
+      <div>
+        <%= link_to '#',
+                      class: 'call-button btn-end-call d-none',
+                      data: {
+                        action: 'click->video-call#endCall',
+                        video_call_target: 'endCallButton'
+                      } do %>
+          <i class="fa-solid fa-xmark"></i>
+          <% end %>
+      </div>
+    <div>
+  <%# <div class="btn-call-start" data-action="click->video-call#joinCall">Call</div> %>
+  <%# <div class="btn-call-end" data-action="click->video-call#endCall">End call</div> %>
+</div>
