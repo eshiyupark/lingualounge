@@ -1,10 +1,15 @@
 class SessionsController < ApplicationController
 
   def show
-    @user = User.find(params[:id])
+    session = Session.find(params[:id])
+    if session.participant_one_id == current_user.id
+      @user = session.participant_two
+    else
+      @user = session.participant_one
+    end
     setup_video_call_token
   end
- 
+
   def create
     language_ids = current_user.user_languages.map { |user_language| user_language.language.id if user_language.active? }.reject { |x| x == nil }
     if Session.where(participant_two_id: nil).where(language_id: language_ids).blank?
@@ -57,7 +62,7 @@ class SessionsController < ApplicationController
       # render some page with error
     end
   end
-  
+
    private
 
   def setup_video_call_token
