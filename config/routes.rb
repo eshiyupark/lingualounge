@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :friendships, only: [:index, :create]
   patch 'friendships', to: 'friendships#update', as: 'accept_friend'
   delete 'friendships', to: 'friendships#destroy', as: 'delete_friend'
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  post "/sessions", to: "sessions#create"
+  get "/sessions/queue", to: "sessions#queue"
+  get "/sessions/:id", to: "sessions#show", as: "sessions_show"
+  delete "/sessions", to: "sessions#destroy", as: "sessions_destroy"
 end

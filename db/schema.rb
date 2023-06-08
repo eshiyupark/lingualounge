@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_072418) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_06_055740) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_072418) do
 
   create_table "sessions", force: :cascade do |t|
     t.bigint "participant_one_id", null: false
-    t.bigint "participant_two_id", null: false
+    t.bigint "participant_two_id"
     t.boolean "accept_one"
     t.boolean "accept_two"
     t.bigint "language_id", null: false
@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_072418) do
     t.bigint "language_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active", default: true
     t.index ["language_id"], name: "index_user_languages_on_language_id"
     t.index ["user_id"], name: "index_user_languages_on_user_id"
   end
