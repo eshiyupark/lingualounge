@@ -5,9 +5,7 @@
   <% case status %>
     <% when 'pending' %>
     <!-- is current user participant 1? i.e. sender of request - cancel-->
-      <p>Pending Friendship!</p>
       <% if current_user.sent_request?(@user) %>
-        <p>I sent the request, so I can cancel!</p>
         <%= form_tag("/friendships", method: 'delete') do%>
         <%= hidden_field_tag 'friend_id', @user.id %>
         <%= submit_tag("Cancel Friend Request") %>
@@ -26,7 +24,6 @@
         <% end %>
       <% end %>
     <% when 'accepted' %>
-      <p>Friendship active!</p>
     <!-- remove friend button -->
       <%= form_tag("/friendships", method: 'delete') do%>
       <%= hidden_field_tag 'friend_id', @user.id %>
@@ -40,3 +37,5 @@
   <%= submit_tag("Add Friend") %>
   <% end %>
 <% end %>
+
+ <%= link_to "Back to All Friends", friendships_path %>

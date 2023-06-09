@@ -7,7 +7,7 @@ export default class extends TwilioVideoController {
     console.log("controller connected")
 
   }
-  
+
   callStarted() {
     console.log('Call started!')
     this.awaitingBuddyTarget.classList.remove('d-none')

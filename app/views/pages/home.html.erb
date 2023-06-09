@@ -13,13 +13,15 @@
   <% end %>
 </div>
 -->
+
 <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-start">
   <h1>Lingua Lounge</h1>
   <div class="button-container">
+    <%= form_tag("/sessions", method: "post") do %>
+     <%= submit_tag("Enter Lounge") %>
+    <% end %>
     <a href="#" class="btn-orange">Find a Lounge</a>
     <a href="#" class="btn-orange">Talk to a Friend </a>
   </div>
 </div>
-<%= form_tag("/sessions", method: "post") do %>
-  <%= submit_tag("Enter Lounge") %>
-<% end %>
+
