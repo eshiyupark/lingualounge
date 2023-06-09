@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
   def show
-    session = Session.find(params[:id])
-    if session.participant_one_id == current_user.id
-      @user = session.participant_two
+    @session = Session.find(params[:id])
+    if @session.participant_one_id == current_user.id
+      @user = @session.participant_two
     else
-      @user = session.participant_one
+      @user = @session.participant_one
     end
     setup_video_call_token
   end

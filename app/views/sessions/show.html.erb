@@ -26,18 +26,18 @@
   </div>
 
   <div>
-    <%= link_to '#THE REVIEW PATH',
-                  class: 'call-button btn-end-call d-none',
-                  data: {
-                    action: 'click->video-call#endCall',
-                    video_call_target: 'endCallButton'
-                  } do %>
-                    <i class="fa-solid fa-xmark"></i>
-                  <% end %>
+    <%= link_to "Finish!", review_new_path(@session) %>
   </div>
 </div>
 
-<!--
-      <%= cl_image_tag @user.photo.key, height: 200, width: 200, crop: :fill %>
--->
 
+
+  <%# <%= cl_image_tag @user.photo.key, height: 200, width: 200, crop: :fill %>
+
+  <%# class: 'call-button btn-end-call', %>
+  <%# data: { %>
+    <%# action: 'click->video-call#endCall', %>
+    <%# video_call_target: 'endCallButton' %>
+  <%# } do %>
+    <%# <i class="fa-solid fa-xmark"></i> %>
+  <%# <% end %>
