@@ -8,8 +8,8 @@ class User < ApplicationRecord
   has_many :languages, through: :user_languages
   has_many :reviews
   has_many :messages
-  has_many :friendships, foreign_key: :participant_one, dependent: :destroy
-  has_many :inverse_friendships, class_name: "Friendship", foreign_key: :participant_two, dependent: :destroy
+  has_many :friendships_created, class_name: "Friendship", foreign_key: :participant_one, dependent: :destroy
+  has_many :friendships_received, class_name: "Friendship", foreign_key: :participant_two, dependent: :destroy
   has_many :sessions, foreign_key: :participant_one, dependent: :destroy
   has_many :inverse_sessions, class_name: "Session", foreign_key: :participant_two, dependent: :destroy
 
@@ -18,6 +18,33 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :gender, presence: true, inclusion: { in: ["male", "female", "prefer not to say"] }
   validate :validate_age
+
+  def friendships
+    friendships_created + friendships_received
+  end
+
+  def is_friend?(user)
+    condition1 = Friendship.where(participant_one: user, participant_two: self).exists?
+    condition2 = Friendship.where(participant_one: self, participant_two: user).exists?
+    condition1 || condition2
+  end
+
+  def friendship_status(friend)
+    friendship1 = Friendship.where(participant_one: friend, participant_two: self)
+    friendship2 = Friendship.where(participant_one: self, participant_two: friend)
+    if friendship1.exists?
+      friendship1[0].status
+    else
+      friendship2[0].status
+    end
+  end
+
+  def sent_request?(receiver)
+    # grab the instances of a friendship
+    sent = Friendship.where(participant_one: self, participant_two: receiver)
+    # is participant one sender? yes or no -- return boolean
+    sent.exists?
+  end
 
   private
 
