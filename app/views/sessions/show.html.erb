@@ -1,20 +1,9 @@
-<div class="container">
+<div class="container d-flex flex-column align-items-center">
   <div class="video-call"
         data-controller="video-call"
         data-video-call-access-token-value="<%= @twilio_jwt %>"
         data-video-call-room-id-value="<%= @room_id %>"
         data-video-call-buddy-video-width-value="640">
-
-    <div class="no-call" data-video-call-target="noCall">
-      <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier" %>
-    </div>
-    <div class="d-none" data-video-call-target="awaitingBuddy">
-      <%= @user.first_name %>
-      <p>connecting...</p>
-    </div>
-    <div class="d-none" data-video-call-target="connectedBuddy">
-      <p>Connected with <%= @user.first_name %>...</p>
-    </div>
     <div data-video-call-target="buddyVideo"></div>
     <div data-video-call-target="localVideo"></div>
 
@@ -24,11 +13,16 @@
                       action: 'click->video-call#joinCall',
                       video_call_target: 'joinCallButton'
                     } do %>
-                      <i class="fa-solid fa-phone"></i>
+                      <button class="btn-orange">I'm ready!</button>
                     <% end %>
     </div>
     <div>
-      <%= link_to '#',
+      <%= link_to root_path do %>
+        <button class="btn-orange">I'm not ready</button>
+      <% end %>
+    </div>
+    <div>
+      <%= link_to '#THE REVIEW PATH',
                     class: 'call-button btn-end-call d-none',
                     data: {
                       action: 'click->video-call#endCall',
@@ -39,3 +33,16 @@
     </div>
   </div>
 </div>
+
+<!--
+    <div class="no-call" data-video-call-target="noCall">
+      <%= @user.username %>
+    </div>
+    <div class="d-none" data-video-call-target="awaitingBuddy">
+      <%= @user.first_name %>
+      <p>connecting...</p>
+    </div>
+    <div class="d-none" data-video-call-target="connectedBuddy">
+      <p>Connected with <%= @user.first_name %>...</p>
+    </div>
+-->

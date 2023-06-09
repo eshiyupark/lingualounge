@@ -10,6 +10,7 @@ export default class extends TwilioVideoController {
   joinCall(){
     console.log("Hello")
   }
+  
   callStarted() {
     console.log('Call started!')
     this.awaitingBuddyTarget.classList.remove('d-none')

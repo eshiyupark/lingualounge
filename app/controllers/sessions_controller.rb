@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   def show
     session = Session.find(params[:id])
     if session.participant_one_id == current_user.id
@@ -22,13 +21,13 @@ class SessionsController < ApplicationController
       @session = Session.where(participant_two_id: nil).where(language_id: language_ids).sample
       @session.participant_two = current_user
       if @session.save
+        # Session.delete(@session.participant_one.sessions.reject { |x| x == @session && @session.participant_two_id != nil })
         redirect_to sessions_show_path(@session)
       else
         # render some page with error
       end
     end
   end
-
 
   def queue
     unless params[:sessions_ids].present?
@@ -63,7 +62,7 @@ class SessionsController < ApplicationController
     end
   end
 
-   private
+  private
 
   def setup_video_call_token
     # No chatting with yourself
@@ -75,5 +74,4 @@ class SessionsController < ApplicationController
     @room_id = twilio.room_id
     # console.log(ringing(@user,@room_id))
   end
-
 end

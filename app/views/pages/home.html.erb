@@ -1,10 +1,4 @@
-
-<h1>Pages#home</h1>
-<div class="container">
-  <h1>Vedio chat</h1>
-
 <!--
-
 <% if user_signed_in? %>
     <h4>Friends</h4>
     <div class="list-group">
@@ -18,23 +12,14 @@
     <p>You need to sign in to see this content</p>
   <% end %>
 </div>
-
 -->
-
-
-<p>Find me in app/views/pages/home.html.erb</p>
-
-
-<div class="container">
-<h1>Lingua Lounge</h1>
-
-<div class="button-container">
-<a href="#" class="btn-orange">Find a Lounge</a>
-<a href="#" class="btn-orange">Talk to a Friend </a>
+<div class="w-100 h-100 d-flex flex-column align-items-center justify-content-start">
+  <h1>Lingua Lounge</h1>
+  <div class="button-container">
+    <a href="#" class="btn-orange">Find a Lounge</a>
+    <a href="#" class="btn-orange">Talk to a Friend </a>
+  </div>
 </div>
-</div>
-
 <%= form_tag("/sessions", method: "post") do %>
   <%= submit_tag("Enter Lounge") %>
 <% end %>
-
