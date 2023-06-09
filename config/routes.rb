@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get "/sessions/queue", to: "sessions#queue"
   get "/sessions/:id", to: "sessions#show", as: "sessions_show"
   delete "/sessions", to: "sessions#destroy", as: "sessions_destroy"
+  delete "/sessions/destroy_sessions", to: "sessions#destroy_sessions"
 end

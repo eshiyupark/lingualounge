@@ -14,9 +14,11 @@ export default class extends Controller {
       })
         .then(response => response.text())
         .then((data) => {
-          console.log(data)
           if (data) {
-            window.location.assign(`/sessions/${data}`)
+            fetch(`/sessions/destroy_sessions?ids=${data.split("%")[1].split("-")}`, {
+              method: "delete",
+            })
+            window.location.assign(`/sessions/${data.split("%")[0]}`)
           }
         })
     }, 6_000);

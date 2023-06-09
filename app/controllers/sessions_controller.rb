@@ -21,7 +21,6 @@ class SessionsController < ApplicationController
       @session = Session.where(participant_two_id: nil).where(language_id: language_ids).sample
       @session.participant_two = current_user
       if @session.save
-        # Session.delete(@session.participant_one.sessions.reject { |x| x == @session && @session.participant_two_id != nil })
         redirect_to sessions_show_path(@session)
       else
         # render some page with error
@@ -40,12 +39,13 @@ class SessionsController < ApplicationController
       @sessions = @sessions_ids.map { |id| Session.find(id) }
       @sessions.each do |session|
         @session = session if session.participant_two_id != nil
+        @other_sessions = current_user.sessions.reject { |x| x == @session && @session.participant_two_id != nil }
       end
     end
 
     respond_to do |format|
       if @session
-        format.text { render inline: @session.id.to_s }
+        format.text { render inline: "#{@session.id}%#{@other_sessions.map(&:id).join("-")}" }
       else
         format.text { render inline: "" }
       end
@@ -60,6 +60,12 @@ class SessionsController < ApplicationController
     else
       # render some page with error
     end
+  end
+
+  def destroy_sessions
+    @ids = params[:ids].split(",")
+    Session.destroy(@ids.map(&:to_i))
+    # NEEDS FIXING
   end
 
   private
