@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
   def create
     language_ids = current_user.user_languages.map { |user_language| user_language.language.id if user_language.active? }.reject { |x| x == nil }
-    if Session.where(participant_two_id: nil).where(language_id: language_ids).blank?
+    if Session.where(participant_two_id: nil).where(language_id: language_ids).where.not(participant_one_id: current_user.id).blank?
       language_ids.each do |id|
         session = Session.new(participant_one_id: current_user.id, language_id: id)
         session.save
@@ -28,7 +28,6 @@ class SessionsController < ApplicationController
     end
   end
 
-
   def queue
     unless params[:sessions_ids].present?
       # When you first enter the queue page
@@ -40,12 +39,13 @@ class SessionsController < ApplicationController
       @sessions = @sessions_ids.map { |id| Session.find(id) }
       @sessions.each do |session|
         @session = session if session.participant_two_id != nil
+        @other_sessions = current_user.sessions.reject { |x| x == @session && @session.participant_two_id != nil }
       end
     end
 
     respond_to do |format|
       if @session
-        format.text { render inline: @session.id.to_s }
+        format.text { render inline: "#{@session.id}%#{@other_sessions.map(&:id).join("-")}" }
       else
         format.text { render inline: "" }
       end
@@ -62,7 +62,13 @@ class SessionsController < ApplicationController
     end
   end
 
-   private
+  def destroy_sessions
+    @ids = params[:ids].split(",")
+    Session.destroy(@ids.map(&:to_i))
+    # NEEDS FIXING
+  end
+
+  private
 
   def setup_video_call_token
     # No chatting with yourself
@@ -74,5 +80,4 @@ class SessionsController < ApplicationController
     @room_id = twilio.room_id
     # console.log(ringing(@user,@room_id))
   end
-
 end

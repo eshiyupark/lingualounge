@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "/sessions/queue", to: "sessions#queue"
   get "/sessions/:id", to: "sessions#show", as: "sessions_show"
   delete "/sessions", to: "sessions#destroy", as: "sessions_destroy"
+  delete "/sessions/destroy_sessions", to: "sessions#destroy_sessions"
   get "/sessions/:session_id/reviews/new", to: "reviews#new"
   post "/sessions/:session_id/reviews", to: "reviews#create", as: "new_review"
 end
