@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   def show
     session = Session.find(params[:id])
     if session.participant_one_id == current_user.id

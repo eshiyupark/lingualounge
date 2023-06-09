@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :users, only: [:show]
-  resources :reviews, only: [:create]
   resources :friendships, only: [:index, :create]
   patch 'friendships', to: 'friendships#update', as: 'accept_friend'
   delete 'friendships', to: 'friendships#destroy', as: 'delete_friend'
@@ -11,4 +10,6 @@ Rails.application.routes.draw do
   get "/sessions/queue", to: "sessions#queue"
   get "/sessions/:id", to: "sessions#show", as: "sessions_show"
   delete "/sessions", to: "sessions#destroy", as: "sessions_destroy"
+  get "/sessions/:session_id/reviews/new", to: "reviews#new"
+  post "/sessions/:session_id/reviews", to: "reviews#create", as: "new_review"
 end
