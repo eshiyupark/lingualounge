@@ -57,4 +57,5 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+  # config.hosts << "3c3b-149-167-180-200.ngrok-free.app"
 end
