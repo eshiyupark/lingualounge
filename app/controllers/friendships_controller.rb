@@ -1,5 +1,4 @@
 class FriendshipsController < ApplicationController
-
   def index
     @friendships = current_user.friendships
     @friendships_and_buddies = @friendships.map do |friendship|
@@ -35,7 +34,7 @@ class FriendshipsController < ApplicationController
     @friend_id = params[:friend_id]
     @friendship1 = Friendship.where(participant_one_id: @friend_id, participant_two_id: current_user.id).first
     @friendship2 = Friendship.where(participant_one_id: current_user.id, participant_two_id: @friend_id).first
-    @friendship1 == nil ? @friendship2.destroy : @friendship1.destroy
+    @friendship1.nil? ? @friendship2.destroy : @friendship1.destroy
   end
 
   private
