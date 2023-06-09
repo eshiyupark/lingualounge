@@ -10,7 +10,7 @@
 
 
     <div class="no-call" data-video-call-target="noCall">
-      <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier" %>
+      <%= cl_image_tag @user.photo.key, height: 200, width: 200, crop: :fill %>
     </div>
     <div class="d-none" data-video-call-target="awaitingBuddy">
       <%= @user.first_name %>
@@ -47,4 +47,3 @@
   <%# <div class="btn-call-start" data-action="click->video-call#joinCall">Call</div> %>
   <%# <div class="btn-call-end" data-action="click->video-call#endCall">End call</div> %>
 </div>
-
