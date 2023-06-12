@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import FriendshipSubscriptionController from "./friendship_subscription_controller"
+application.register("friendship-subscription", FriendshipSubscriptionController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
@@ -12,6 +15,9 @@ application.register("queue-for-lounge", QueueForLoungeController)
 
 import StarRatingController from "./star_rating_controller"
 application.register("star-rating", StarRatingController)
+
+import TomSelectController from "./tom_select_controller"
+application.register("tom-select", TomSelectController)
 
 import VideoCallController from "./video_call_controller"
 application.register("video-call", VideoCallController)

@@ -35,6 +35,7 @@ gem 'twilio-ruby'
 
 # gem for image hosting
 gem "cloudinary"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
