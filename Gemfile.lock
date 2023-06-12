@@ -190,9 +190,6 @@ GEM
       rails (>= 5.2.0)
     orm_adapter (0.5.0)
     pg (1.5.3)
-    pg_search (2.3.6)
-      activerecord (>= 5.2)
-      activesupport (>= 5.2)
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -316,7 +313,6 @@ DEPENDENCIES
   jsbundling-rails
   noticed (~> 1.6)
   pg (~> 1.1)
-  pg_search
   puma (~> 5.0)
   rails (~> 7.0.5)
   sassc-rails
