@@ -12,6 +12,13 @@ class FriendshipsController < ApplicationController
         buddy: buddy
       }
     end
+    @messages = Message.all
+
+  end
+
+  def show
+    @friendship = Friendship.find(params[:id])
+    @message = Message.new
   end
 
   def create

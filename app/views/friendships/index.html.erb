@@ -4,6 +4,26 @@
     <% @user = User.find(friend[:buddy].id) %>
     <li><%= link_to friend[:buddy].first_name + " " + friend[:buddy].last_name, user_path(@user) %>
     Status: <%= friend[:friendship].status %></li>
+    <div class="chat">
+      <% arr = [] %>
+      <% @messages.each do |msg| %>
+        <%  if msg.friendship_id  == friend[:friendship].id %>
+          <% arr.push(msg) %>
+        <% end %>
+      <% end %>
+      <%= link_to "open chat" , friendship_path(friend[:friendship].id)%>
+      <%  if arr != []%>
+        <% if arr.last.user_id == current_user.id %>
+          <p><em><%= arr.last[:content] %></em> - You</p>
+          <p><%= arr.last.created_at.strftime("%a %b %e at %l:%M %p") %></p>
+        <% else %>
+          <p><em><%= arr.last[:content] %></em> - <%= arr.last.user.first_name %></p>
+          <p><%= arr.last.created_at.strftime("%a %b %e at %l:%M %p") %></p>
+        <% end %>
+      <% else %>
+        <p>No messages</p>
+      <%end %>
+    </div>
   <% end %>
 </ol>
 
