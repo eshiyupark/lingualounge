@@ -1,51 +1,47 @@
 class UserLanguagesController < ApplicationController
-  before_action :set_user
-
   def new_language #new
     @user_language = UserLanguage.new
     @all_languages = Language.all
     capitalize(@all_languages)
   end
 
+  #creats languages fine but errors do not render properly
   def create_language #create
-    raise
-    @name = params[:user_language][:language].downcase
-    @language = Language.where(name: @name)[0]
-    @user_language = UserLanguage.new(user_language_params)
-    @user_language.user_id = @user.id
-    @user_language.language_id = @language.id
-    if @user_language.save
-      redirect_to
+    @name = params[:user_language][:language].reject(&:blank?) # @name is an array of languages user inputs
+    if @name.blank?
+      flash[:error] = "You must select at least one language"
+      render :new_language
     else
-      render :new
+      @name.each do |language|
+        @language = Language.where(name: language.downcase)[0]
+        @user_language = UserLanguage.new(user_language_params)
+        @user_language.user = current_user
+        @user_language.language = @language
+        if @user_language.save
+          redirect_to root_path
+        else
+          render :new_language
+        end
+      end
     end
   end
 
-  def set_language #index
-    @all_user_languages = @user.languages
-  end
-
-  # keepsrouting to 'get' (set_language), raise ticket from here onwards
+  # keeps routing to 'get' (set_language), raise ticket from here onwards
   def update_language #update
-    @language = Language.find(params[:language_id])
+    @language = UserLanguage.find(params[:language_id])
     raise
-    @user_language = @language.id
-    @user_language.update(active: true)
+    @language.update(active: true)
   end
 
   def destroy_language #destroy
-    @language = Language.find(:language_id)
+    @language = UserLanguage.find(params[:language_id])
     @language.destroy
   end
 
   private
 
   def user_language_params
-    params.require(:user_language).permit(:language_id, :user_id, :active)
-  end
-
-  def set_user
-    @user = current_user
+    params.require(:user_language).permit(:user_id, :active, :language_id)
   end
 
   def capitalize(array)

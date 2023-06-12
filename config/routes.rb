@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   get "/sessions/:session_id/reviews/new", to: "reviews#new", as: "review_new"
   # make above route path something else
   post "/sessions/:session_id/reviews", to: "reviews#create", as: "new_review"
-  get "/user_languages/set_language", to: "user_languages#set_language", as: "edit_language"
   patch '/user_languages/:id', to: "user_languages#update_language", as: "update_language"
   get "/user_languages/new", to: "user_languages#new_language", as: 'new_language'
   post "/user_languages", to: "user_languages#create_language", as: 'add_user_language'

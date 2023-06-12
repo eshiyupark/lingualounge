@@ -1,4 +1,0 @@
-<h2>Choose languages to chat!</h2>
-<% @all_user_languages.each do |language| %>
-  <%= link_to "#{language.name.capitalize}", update_language_path(language) %>
-<% end %>

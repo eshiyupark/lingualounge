@@ -1,7 +1,7 @@
 <h2>Add to your languages</h2>
 <div class="container">
   <%= simple_form_for @user_language, method: :post, url: add_user_language_path do |f| %>
-    <%= f.input :language, collection: @language_names, input_html: {multiple: true, data: {controller: "tom-select", tom_select_options_value: {tags: true}}} %>
+    <%= f.input :language, collection: @language_names, input_html: {multiple: true, include_blank: false, data: {controller: "tom-select", tom_select_options_value: {tags: true}}} %>
     <%= f.button :submit %>
   <% end %>
 </div>
