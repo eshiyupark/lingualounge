@@ -6,7 +6,7 @@ application.register('video-call', TwilioVideoController)
 
 // Connects to data-controller="video-call"
 export default class extends TwilioVideoController {
-  static targets = ['header', 'buddyVideo', 'localVideo', 'joinCallButton', 'endCallButton', 'finishButton']
+  static targets = ['header', 'container', 'containerTwo', 'videoContainer', 'mainContainer', 'buddyVideo', 'localVideo', 'joinCallButton', 'endCallButton', 'finishButton']
   connect(){
     console.log("controller connected")
   }
@@ -20,10 +20,14 @@ export default class extends TwilioVideoController {
   }
 
   joinCall() {
-    this.headerTarget.classList.add('d-none')
-    this.joinCallButtonTarget.classList.add('d-none')
-    this.endCallButtonTarget.classList.add('d-none')
+    this.containerTarget.classList.remove('d-flex')
+    this.containerTarget.classList.add('hidden')
+    this.containerTwoTarget.classList.add('hidden')
+    this.headerTarget.classList.add('hidden')
+    this.joinCallButtonTarget.classList.add('hidden')
+    this.endCallButtonTarget.classList.add('hidden')
     this.finishButtonTarget.classList.remove('d-none')
+    this.videoContainerTarget.classList.remove('d-none')
   }
 
   endCall() {

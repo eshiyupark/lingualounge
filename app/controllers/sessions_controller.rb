@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  layout "video_chat"
+
   def show
     @session = Session.find(params[:id])
     if @session.participant_one_id == current_user.id

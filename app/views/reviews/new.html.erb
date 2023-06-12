@@ -1,27 +1,52 @@
-<!-- Review form -->
+<div class="w-100 h-100 d-flex flex-column align-items-center justify-content-start">
+  <div class="d-flex flex-column align-items-center justify-content-around h-75 w-75">
+    <div class="avatar-flex"><%= @user.photo %></div>
+    <div>
+      <h2><%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></h2>
+    </div>
+    <div class="review-form-container">
+      <h2>Rate your experience</h2>
+      <%= simple_form_for [@session, @review], url: new_review_path(@session), html: { class: "w-100"} do |f| %>
+        <%= f.input :rating, as: :radio_buttons, collection: 1..5 %>
+        <%= f.submit "Submit review", class: "btn-orange" %>
+      <% end %>
+      <% unless current_user.is_friend?(@user) %>
+        <%= form_tag("/friendships", method: 'post', class: "w-100") do%>
+          <%= hidden_field_tag 'friend_id', @user.id %>
+          <%= submit_tag("Add Friend", class: "btn-orange") %>
+        <% end %>
+      <% end %>
+    </div>
+    <%= link_to "Continue", root_path, class: "btn-orange" %>
+  </div>
+</div>
+
+<!-- Review form
 <div class="container">
   <div class="rating-card">
     <h2>Rate your experience!</h2>
-    <%= simple_form_for [@session, @review], url: new_review_path(@session) do |f| %>
-      <%= f.input :rating, as: :radio_buttons, collection: 1..5 %>
-      <%= f.submit "Submit review", class: "btn btn-primary" %>
+    <% unless current_user.is_friend?(@user) %>
+      <%= form_tag("/friendships", method: 'post') do%>
+        <%= hidden_field_tag 'friend_id', @user.id %>
+        <%= submit_tag("Add Friend") %>
+      <% end %>
     <% end %>
   </div>
-  <!-- Add friend button -->
+
   <div class="friend-request">
     <% if current_user.is_friend?(@user) %>
       <% status = current_user.friendship_status(@user) %>
        <% case status %>
          <% when 'pending' %>
-    <!-- is current user participant 1? i.e. sender of request - cancel-->
+
           <% if current_user.sent_request?(@user) %>
             <%= form_tag("/friendships", method: 'delete') do%>
             <%= hidden_field_tag 'friend_id', @user.id %>
             <%= submit_tag("Cancel Friend Request") %>
             <% end %>
-          <!-- is user participant 1? reject or accept (two buttons)-->
+
           <% else %>
-            <!-- accept button -->
+
             <%= form_tag("/friendships", method: 'patch') do%>
             <%= hidden_field_tag 'friend_id', @user.id %>
             <%= submit_tag("Accept Friend Request") %>
@@ -40,7 +65,8 @@
   </div>
 
   <div class="home-link">
-  <!-- Go back to lounge (roulette)-->
+
     <%= link_to "Back to Lounge", root_path %>
   </div>
 </div>
+-->

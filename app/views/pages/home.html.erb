@@ -15,11 +15,13 @@
 -->
 
 <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-start">
-  <h1>Lingua Lounge</h1>
-  <div class="button-container">
-    <%= form_tag("/sessions", method: "post", class: "w-100") do %>
-     <%= submit_tag("Enter Lounge", class: "btn-orange w-100") %>
-    <% end %>
-    <%= link_to "My Friends", friendships_path, class: "btn-orange w-100 text-center" %>
+  <div class="d-flex flex-column align-items-center justify-content-around h-75 w-75">
+    <h1>Lingua Lounge</h1>
+    <div class="button-container">
+      <%= form_tag("/sessions", method: "post", class: "w-100") do %>
+      <%= submit_tag("Enter Lounge", class: "btn-orange") %>
+      <% end %>
+      <%= link_to "My Friends", friendships_path, class: "btn-orange" %>
+    </div>
   </div>
 </div>
