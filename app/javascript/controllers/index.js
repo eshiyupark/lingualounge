@@ -13,5 +13,8 @@ application.register("hello", HelloController)
 import QueueForLoungeController from "./queue_for_lounge_controller"
 application.register("queue-for-lounge", QueueForLoungeController)
 
+import TomSelectController from "./tom_select_controller"
+application.register("tom-select", TomSelectController)
+
 import VideoCallController from "./video_call_controller"
 application.register("video-call", VideoCallController)
