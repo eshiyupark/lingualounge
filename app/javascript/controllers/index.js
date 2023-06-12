@@ -4,13 +4,14 @@
 
 import { application } from "./application"
 
+import FriendshipSubscriptionController from "./friendship_subscription_controller"
+application.register("friendship-subscription", FriendshipSubscriptionController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
-
-
-import VideoCallController from "./video_call_controller"
-application.register("video-call", VideoCallController)
 
 import QueueForLoungeController from "./queue_for_lounge_controller"
 application.register("queue-for-lounge", QueueForLoungeController)
 
+import VideoCallController from "./video_call_controller"
+application.register("video-call", VideoCallController)

@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :friendships, only: [:index, :create]
   patch 'friendships', to: 'friendships#update', as: 'accept_friend'
   delete 'friendships', to: 'friendships#destroy', as: 'delete_friend'
+  resources :friendships, only: :show do
+    resources :messages, only: :create
+  end
   post "/sessions", to: "sessions#create"
   get "/sessions/queue", to: "sessions#queue"
   get "/sessions/:id", to: "sessions#show", as: "sessions_show"
