@@ -65,7 +65,6 @@ class SessionsController < ApplicationController
   def destroy_sessions
     @ids = params[:ids].split(",")
     Session.destroy(@ids.map(&:to_i))
-    # NEEDS FIXING
   end
 
   private

@@ -15,7 +15,9 @@ export default class extends Controller {
         .then(response => response.text())
         .then((data) => {
           if (data) {
+            console.log(data)
             fetch(`/sessions/destroy_sessions?ids=${data.split("%")[1].split("-")}`, {
+              headers: {'content-type': 'application/json', 'accept': 'application/json', "X-CSRF-Token": document.querySelector("[name='csrf-token']").getAttribute("content"),},
               method: "delete",
             })
             window.location.assign(`/sessions/${data.split("%")[0]}`)

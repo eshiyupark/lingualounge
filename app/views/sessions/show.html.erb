@@ -2,42 +2,41 @@
       data-controller="video-call"
       data-video-call-access-token-value="<%= @twilio_jwt %>"
       data-video-call-room-id-value="<%= @room_id %>"
-      data-video-call-buddy-video-width-value="640">
-  <div data-video-call-target="buddyVideo"></div>
-  <div data-video-call-target="localVideo"></div>
+      data-video-call-buddy-video-width-value="auto">
+  <div>
+    <div data-video-call-target="buddyVideo"></div>
+    <div data-video-call-target="localVideo"></div>
+  </div>
   <div class="d-flex flex-column align-items-center justify-content-around h-75">
-    <h1 class="text-center">Lounge found!</h1>
+    <h1 class="text-center" data-video-call-target="header">Lounge found!</h1>
     <div class="d-flex flex-column align-items-center justify-content-start">
-      <div>
-        <%= link_to '#',class: 'call-button btn-start-call',
-                      data: {
-                        action: 'click->video-call#joinCall',
-                        video_call_target: 'joinCallButton'
-                      } do %>
-                        <button class="btn-orange">I'm ready!</button>
-                      <% end %>
-      </div>
-      <div>
-        <%= link_to root_path do %>
-          <button class="btn-orange">I'm not ready</button>
-        <% end %>
-      </div>
+      <div class="btn-orange" data-action="click->video-call#joinCall" data-video-call-target="joinCallButton">I'm ready</div>
+      <div class="btn-orange" data-action="click->video-call#endCall" data-video-call-target="endCallButton">I'm not ready</div>
     </div>
   </div>
-
-  <div>
-    <%= link_to "Finish!", review_new_path(@session) %>
+  <div class="btn-orange d-none" data-video-call-target="finishButton">
+    <%= link_to "Exit", review_new_path(@session) %>
   </div>
 </div>
 
 
 
   <%# <%= cl_image_tag @user.photo.key, height: 200, width: 200, crop: :fill %>
-
-  <%# class: 'call-button btn-end-call', %>
-  <%# data: { %>
-    <%# action: 'click->video-call#endCall', %>
-    <%# video_call_target: 'endCallButton' %>
-  <%# } do %>
-    <%# <i class="fa-solid fa-xmark"></i> %>
-  <%# <% end %>
+      <%# <div>
+        <%= link_to '#',class: 'call-button btn-start-call',
+                      data: {
+                        action: 'click->video-call#joinCall',
+                        video_call_target: 'joinCallButton'
+                      } do %>
+                        <%# <p>I'm ready!</p>
+                      <% end %>
+      <%# </div>
+      <div>
+        <%= link_to root_path, class: 'call-button btn-end-call',
+                      data: {
+                        action: 'click->video-call#endCall',
+                        video_call_target: 'endCallButton'
+                      } do %>
+                        <%# <p>I'm not ready</p>
+                      <% end %>
+      <%# </div>  %>
