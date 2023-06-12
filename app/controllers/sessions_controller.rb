@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  layout "video_chat"
+
   def show
     @session = Session.find(params[:id])
     if @session.participant_one_id == current_user.id
@@ -65,7 +67,6 @@ class SessionsController < ApplicationController
   def destroy_sessions
     @ids = params[:ids].split(",")
     Session.destroy(@ids.map(&:to_i))
-    # NEEDS FIXING
   end
 
   private

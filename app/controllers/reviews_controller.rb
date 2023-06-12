@@ -15,7 +15,7 @@ class ReviewsController < ApplicationController
     @review.session = @session
     @review.user_id = current_user.id
     if @review.save
-      redirect_to root_path
+      # AJAX HERE to change button
     else
       render :new
     end

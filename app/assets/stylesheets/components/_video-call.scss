@@ -1,5 +1,34 @@
 .video-call {
-  width: 640px;
-  height: 536px;
   margin: 0 auto;
+}
+
+.call-video-views {
+  position: relative;
+  height: 75%;
+  width: 100%;
+  background-color: black;
+}
+
+#local-video {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+
+  video {
+    background: black;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+#remote-video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-position: center;
+}
+
+.hidden {
+  display: none !important;
 }

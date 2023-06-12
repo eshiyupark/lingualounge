@@ -25,7 +25,7 @@ class FriendshipsController < ApplicationController
     @friend_id = params[:friend_id]
     @friendship = Friendship.new(status: "pending", participant_one_id: current_user.id, participant_two_id: @friend_id)
     @friendship.save
-    redirect_to user_path(@friend_id) if @friendship.save
+    #ajax here to update button
   end
 
   # def show - to display all of messages between you and your friends (through friendships#show)

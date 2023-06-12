@@ -6,7 +6,9 @@
 // External libraries
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome";
+@import "star-rating.js/dist/star-rating.css";
 @import "tom-select/dist/scss/tom-select";
+
 
 // Your CSS partials
 @import "components/index";
@@ -14,6 +16,6 @@
 @import "pages/home";
 
 body {
-  height: 100vh;
   width: 100vw;
+  background-color: $main-blue !important;
 }
