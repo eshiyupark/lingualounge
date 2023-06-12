@@ -17,11 +17,9 @@
 <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-start">
   <h1>Lingua Lounge</h1>
   <div class="button-container">
-    <%= form_tag("/sessions", method: "post") do %>
-     <%= submit_tag("Enter Lounge") %>
+    <%= form_tag("/sessions", method: "post", class: "w-100") do %>
+     <%= submit_tag("Enter Lounge", class: "btn-orange w-100") %>
     <% end %>
-    <a href="#" class="btn-orange">Find a Lounge</a>
-    <a href="#" class="btn-orange">Talk to a Friend </a>
-    <%= link_to "View friends", friendships_path %>
+    <%= link_to "My Friends", friendships_path, class: "btn-orange w-100 text-center" %>
   </div>
 </div>
