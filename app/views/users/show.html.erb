@@ -1,5 +1,5 @@
 <h1><%= @user.first_name %>'s profile </h1>
-
+<%# <%= @user.online? %>
 <% if current_user.is_friend?(@user) %>
   <% status = current_user.friendship_status(@user) %>
   <% case status %>

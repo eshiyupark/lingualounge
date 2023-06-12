@@ -47,6 +47,10 @@ class User < ApplicationRecord
     sent.exists?
   end
 
+  # def online?
+  #   updated_at > 2.minutes.ago
+  # end
+
   private
 
   def validate_age
