@@ -29,7 +29,11 @@ gem "jbuilder"
 
 # faker gem for fake seeds
 gem "faker"
+
+# gem for video chat
 gem 'twilio-ruby'
+
+# gem for image hosting
 gem "cloudinary"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
