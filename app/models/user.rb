@@ -47,6 +47,16 @@ class User < ApplicationRecord
     sent.exists?
   end
 
+  def highly_rated?
+    sessions = Session.where(participant_one: self).or(Session.where(participant_two: self))
+    reviews = sessions.map { |session| session.reviews.where.not(user_id: self.id) }.flatten
+    sum = 0
+    reviews.each do |review|
+      sum += review.rating
+    end
+    return ((sum.to_f / reviews.length) >= 4)
+  end
+
   # def online?
   #   updated_at > 2.minutes.ago
   # end

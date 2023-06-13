@@ -1,24 +1,31 @@
 class UserLanguagesController < ApplicationController
-  def new_language #new
-    @user_language = UserLanguage.new
-    @languages = Language.all - current_user.languages
-    capitalize(@languages)
-  end
-
- # note that flash error does not appear but will come back to this
+  #creats languages fine but errors do not render properly
   def create_language #create
-    @name = params[:user_language][:language].reject(&:blank?) # @name is an array of languages user inputs
-    if @name.blank?
-      flash[:error] = "You must select at least one language"
-    else
-      @name.each do |language|
-        @language = Language.find_by(name: language.downcase)
-        @user_language = UserLanguage.new(user_language_params)
-        @user_language.user = current_user
-        @user_language.language = @language
-        @user_language.save
-        redirect_to root_path
+    @current_ids = current_user.languages.map(&:id)
+    @x_ids = params[:user_language][:user_languages].reject(&:blank?)
+    @ids = @x_ids.map(&:to_i)
+    @delete_ids = (@current_ids - @ids)
+    unless @delete_ids.blank? || @ids.blank?
+      @delete_ids.each do |id|
+        object = UserLanguage.where(language_id: id).where(user_id: current_user.id)[0]
+        object.destroy
       end
+    end
+    if @ids.blank?
+      flash[:notice] = "You must select at least one language"
+      # FIX THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    else
+      @ids.each do |id|
+        unless current_user.languages.map(&:id).include?(id)
+          @language = Language.find(id)
+          @user_language = UserLanguage.new(user_language_params)
+          @user_language.user = current_user
+          @user_language.language = @language
+          @user_language.save
+        end
+      end
+      redirect_to edit_user_registration_path
+      flash[:notice] = "Successfully saved languages"
     end
   end
 
