@@ -1,6 +1,10 @@
 <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-start">
   <div class="d-flex flex-column align-items-center justify-content-around h-75 w-75">
-    <div class="avatar-flex"><%= @user.photo %></div>
+    <% if @user.photo.attached? %>
+      <%= cl_image_tag @user.photo.key, crop: :fill, class: "avatar-flex" %>
+    <% else %>
+      <%= image_tag "https://th.bing.com/th/id/OIP.ZT-Tw8tYy38htqch69vsGQAAAA?pid=ImgDet&rs=1", class: "avatar-flex" %>
+    <% end %>
     <div>
       <h2><%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></h2>
     </div>

@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   # make above route path something else
   post "/sessions/:session_id/reviews", to: "reviews#create", as: "new_review"
   patch '/user_languages/:id', to: "user_languages#update_language", as: "update_language"
-  get "/user_languages/new", to: "user_languages#new_language", as: 'new_language'
   post "/user_languages", to: "user_languages#create_language", as: 'add_user_language'
   delete '/user_languages/:id', to: 'user_languages#destroy_language', as: 'delete_language'
 end

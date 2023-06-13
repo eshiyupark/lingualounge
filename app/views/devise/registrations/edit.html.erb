@@ -1,7 +1,16 @@
 <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-start">
   <h2>Edit Profile</h2>
   <div class="review-form-container w-75">
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= simple_form_for :user_language, method: :post, html: { class: "w-100 p-1" }, url: add_user_language_path do |f| %>
+      <%= f.label :user_languages, 'My Languages*' %>
+      <%= f.input :user_languages,
+                  required: true,
+                  label: false,
+                  collection: Language.all,
+                  input_html: {multiple: true, include_blank: false, data: {controller: "tom-select", tom_select_options_value: {tags: true, items: resource.languages.map(&:id)}}} %>
+      <%= f.submit "Save Changes", class: "btn-orange" %>
+    <% end %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "w-100 p-1" }) do |f| %>
       <%= f.error_notification %>
 
       <div class="form-inputs">
@@ -11,21 +20,17 @@
           <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
         <% end %>
 
-        <%= f.input :languages,
-                    required: true,
-                    collection: Language.all,
-                    input_html: {multiple: true, include_blank: false, data: {controller: "tom-select", tom_select_options_value: {tags: true, items: resource.languages.map(&:id)}}} %>
-        <%= f.label :username, 'Username' %>
+        <%= f.label :username, 'Username*' %>
         <%= f.input :username,
                     required: true,
                     label: false,
                     input_html: { autocomplete: "username" } %>
-        <%= f.label :first_name, 'First Name' %>
+        <%= f.label :first_name, 'First Name*' %>
         <%= f.input :first_name,
                     required: true,
                     label: false,
                     input_html: { autocomplete: "given-name" } %>
-        <%= f.label :last_name, 'Last Name' %>
+        <%= f.label :last_name, 'Last Name*' %>
         <%= f.input :last_name,
                     required: true,
                     label: false,
@@ -49,6 +54,7 @@
                     input_html: { autocomplete: "new-password" } %>
         <%= f.input :current_password,
                     required: true,
+                    placeholder: "Enter current password to confirm changes",
                     input_html: { autocomplete: "current-password" } %>
         <%= f.input :photo, as: :file %>
       </div>
