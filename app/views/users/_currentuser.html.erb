@@ -4,7 +4,7 @@
     <div>
       <h2><%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></h2>
     </div>
-    <%= link_to "Edit Profile", edit_user_path(@user), class: "btn-orange" %>
+    <%= link_to "Edit Profile", edit_user_registration_path, class: "btn-orange" %>
     <% if @user.highly_rated? %>
       <div class="review-form-container">
         <p class="m-0">Highly rated! (insert badge icon)</p>
