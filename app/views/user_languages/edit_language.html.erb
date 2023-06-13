@@ -1,0 +1,12 @@
+<div class="container">
+<h2>Languages:</h2>
+  <%= form_tag update_language_url, method: :patch do %>
+    <% @user_languages.each do |user_language| %>
+      <%= check_box_tag 'user_language_ids[]', user_language.id %>
+      <%= user_language.language.name.capitalize %>
+    <% end %>
+
+    <%= submit_tag 'Take me to Lounge!' %>
+  <% end %>
+</div>
+

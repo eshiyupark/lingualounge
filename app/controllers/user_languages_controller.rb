@@ -29,17 +29,25 @@ class UserLanguagesController < ApplicationController
     end
   end
 
-  # keeps routing to 'get' (set_language), raise ticket from here onwards
-  def update_language #update
-    @language = UserLanguage.find(params[:language_id])
-    raise
-    @language.update(active: true)
+  def edit_language
+    @user_languages = current_user.user_languages
   end
 
-  def destroy_language #destroy
-    @language = UserLanguage.find(params[:language_id])
-    @language.destroy
+  def update_language #update
+    id_array = params[:user_language_ids]
+    id_array.each do |id|
+      id.to_i
+      @language = UserLanguage.find(id)
+      @language.update(active: true)
+    end
+    redirect_to sessions_queue_path
   end
+
+  # come back to this depending on the users/edit page
+  # def destroy_language
+  #   @language = UserLanguage.find(params[:language_id])
+  #   @language.destroy
+  # end
 
   private
 
