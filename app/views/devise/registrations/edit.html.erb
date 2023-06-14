@@ -16,9 +16,9 @@
       <div class="form-inputs">
         <%= f.input :email, required: true, autofocus: true %>
 
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-        <% end %>
+        <%# <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <%# <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+        <%# <% end %>
 
         <%= f.label :username, 'Username*' %>
         <%= f.input :username,
@@ -39,6 +39,7 @@
         <%= f.input :gender,
                     required: false,
                     label: false,
+                    input_html: { class: "bg-light" },
                     collection: ["male", "female", "prefer not to say"] %>
         <%= f.label :password, 'New Password' %>
         <%= f.input :password,

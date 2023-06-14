@@ -1,6 +1,34 @@
 class UserLanguagesController < ApplicationController
-  #creats languages fine but errors do not render properly
-  def create_language #create
+  #user_language selection page directly after sign up
+  def new_language
+    @user = current_user
+  end
+
+  #user_language creation action after initial sign up selection
+  def setup_language
+    @x_ids = params[:user_language][:user_languages].reject(&:blank?)
+    @ids = @x_ids.map(&:to_i)
+    if @ids.blank?
+      @message = "You must select at least one language."
+      @user = current_user
+      render :new_language, status: :unprocessable_entity
+    else
+      @ids.each do |id|
+        unless current_user.languages.map(&:id).include?(id)
+          @language = Language.find(id)
+          @user_language = UserLanguage.new(user_language_params)
+          @user_language.user = current_user
+          @user_language.language = @language
+          @user_language.save
+        end
+      end
+      redirect_to root_path
+      flash[:notice] = "You're all set!"
+    end
+  end
+
+  #called when user updates languages in edit profile page
+  def create_language
     @current_ids = current_user.languages.map(&:id)
     @x_ids = params[:user_language][:user_languages].reject(&:blank?)
     @ids = @x_ids.map(&:to_i)
@@ -12,8 +40,8 @@ class UserLanguagesController < ApplicationController
       end
     end
     if @ids.blank?
-      flash[:notice] = "You must select at least one language"
-      # FIX THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      redirect_to edit_user_registration_path
+      flash[:alert] = "You must select at least one language"
     else
       @ids.each do |id|
         unless current_user.languages.map(&:id).include?(id)
