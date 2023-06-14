@@ -9,8 +9,9 @@ class UserLanguagesController < ApplicationController
     @x_ids = params[:user_language][:user_languages].reject(&:blank?)
     @ids = @x_ids.map(&:to_i)
     if @ids.blank?
-      flash[:notice] = "You must select at least one language"
-      # FIX THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      @message = "You must select at least one language."
+      @user = current_user
+      render :new_language, status: :unprocessable_entity
     else
       @ids.each do |id|
         unless current_user.languages.map(&:id).include?(id)
@@ -26,7 +27,8 @@ class UserLanguagesController < ApplicationController
     end
   end
 
-  def create_language #create
+  #called when user updates languages in edit profile page
+  def create_language
     @current_ids = current_user.languages.map(&:id)
     @x_ids = params[:user_language][:user_languages].reject(&:blank?)
     @ids = @x_ids.map(&:to_i)
@@ -38,8 +40,8 @@ class UserLanguagesController < ApplicationController
       end
     end
     if @ids.blank?
-      flash[:notice] = "You must select at least one language"
-      # FIX THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      @message = "1"
+      render "devise/registrations/edit", locals: { resource: current_user, resource_name: :user, message: @message }
     else
       @ids.each do |id|
         unless current_user.languages.map(&:id).include?(id)

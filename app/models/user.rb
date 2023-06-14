@@ -18,6 +18,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :gender, presence: true, inclusion: { in: ["male", "female", "prefer not to say"] }
+  validates :date_of_birth, presence: true
   validate :validate_age
 
   def friendships
