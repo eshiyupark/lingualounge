@@ -1,12 +1,13 @@
 <div class="container">
-<h2>Languages:</h2>
-  <%= form_tag update_language_url, method: :patch do %>
-    <% @user_languages.each do |user_language| %>
-      <%= check_box_tag 'user_language_ids[]', user_language.id %>
-      <%= user_language.language.name.capitalize %>
+  <h2>Languages:</h2>
+  <div class="form" data-controller="session-language">
+    <%= form_tag update_language_url, method: :patch do %>
+      <% @user_languages.each do |user_language| %>
+        <%= check_box_tag 'user_language_ids[]', user_language.id, false, data: { action: "click->session-language#disable", session_language_target: 'checkbox'} %>
+        <%= user_language.language.name.capitalize %>
+      <% end %>
+      <%= submit_tag 'Take me to Lounge!', class: "btn-orange", disabled: true, data: { session_language_target: 'button' }%>
     <% end %>
-
-    <%= submit_tag 'Take me to Lounge!', class: "btn-orange" %>
-  <% end %>
+  </div>
    <%= link_to "Back to Home", root_path, class: "btn-orange" %>
 </div>
