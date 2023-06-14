@@ -3,10 +3,11 @@
     <h1 class="text-center">Looking for a Lounge...</h1>
     <div class="button-container">
       <h2>Languages:</h2>
+      <ul>
       <% @sessions.each do |session| %>
-        <% name = session.language.name.capitalize %>
-        <p><%= link_to "#{name}", update_language_path(session.language) %></p>
+        <li><%= session.language.name.capitalize %></li>
       <% end %>
+      </ul>
     </div>
   </div>
   <div>

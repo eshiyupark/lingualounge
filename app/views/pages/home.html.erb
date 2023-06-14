@@ -18,9 +18,7 @@
   <div class="d-flex flex-column align-items-center justify-content-around h-75 w-75">
     <h1>Lingua Lounge</h1>
     <div class="button-container">
-      <%= form_tag("/sessions", method: "post", class: "w-100") do %>
-      <%= submit_tag("Enter Lounge", class: "btn-orange") %>
-      <% end %>
+      <%= link_to "Enter Lounge", edit_language_path, class: "btn-orange" %>
       <%= link_to "My Friends", friendships_path, class: "btn-orange" %>
     </div>
   </div>

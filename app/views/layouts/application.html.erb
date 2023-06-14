@@ -12,14 +12,12 @@
   </head>
 
   <body>
-    <%= render "shared/flashes" %>
     <div class="content-wrapper">
+      <%= render "shared/flashes" %>
       <div class="content">
         <%= yield %>
       </div>
-      <% unless action_name == "" %>
-        <%= render "shared/navbar" %>
-      <% end %>
+      <%= render "shared/navbar" %>
     </div>
   </body>
 </html>

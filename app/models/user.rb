@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :gender, presence: true, inclusion: { in: ["male", "female", "prefer not to say"] }
+  validates :date_of_birth, presence: true
   validate :validate_age
 
 
@@ -49,6 +50,16 @@ class User < ApplicationRecord
     sent = Friendship.where(participant_one: self, participant_two: receiver)
     # is participant one sender? yes or no -- return boolean
     sent.exists?
+  end
+
+  def highly_rated?
+    sessions = Session.where(participant_one: self).or(Session.where(participant_two: self))
+    reviews = sessions.map { |session| session.reviews.where.not(user_id: self.id) }.flatten
+    sum = 0
+    reviews.each do |review|
+      sum += review.rating
+    end
+    return ((sum.to_f / reviews.length) >= 4)
   end
 
   # def online?

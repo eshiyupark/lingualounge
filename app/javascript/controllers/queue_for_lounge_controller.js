@@ -8,7 +8,7 @@ export default class extends Controller {
 
   connect() {
 
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       fetch(`/sessions/queue?sessions_ids=${JSON.stringify(this.sessionsIdsValue)}`, {
         headers: { "Accept": "text/plain" }
       })
@@ -24,5 +24,9 @@ export default class extends Controller {
           }
         })
     }, 6_000);
+  }
+
+  disconnect () {
+    clearInterval(this.intervalId);
   }
 }
