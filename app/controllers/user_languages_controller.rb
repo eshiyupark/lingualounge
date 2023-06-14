@@ -1,5 +1,31 @@
 class UserLanguagesController < ApplicationController
-  #creats languages fine but errors do not render properly
+  #user_language selection page directly after sign up
+  def new_language
+    @user = current_user
+  end
+
+  #user_language creation action after initial sign up selection
+  def setup_language
+    @x_ids = params[:user_language][:user_languages].reject(&:blank?)
+    @ids = @x_ids.map(&:to_i)
+    if @ids.blank?
+      flash[:notice] = "You must select at least one language"
+      # FIX THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    else
+      @ids.each do |id|
+        unless current_user.languages.map(&:id).include?(id)
+          @language = Language.find(id)
+          @user_language = UserLanguage.new(user_language_params)
+          @user_language.user = current_user
+          @user_language.language = @language
+          @user_language.save
+        end
+      end
+      redirect_to root_path
+      flash[:notice] = "You're all set!"
+    end
+  end
+
   def create_language #create
     @current_ids = current_user.languages.map(&:id)
     @x_ids = params[:user_language][:user_languages].reject(&:blank?)

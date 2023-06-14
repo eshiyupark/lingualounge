@@ -31,11 +31,6 @@
                     end_year: Date.today.year,
                     include_blank: true,
                     input_html: { autocomplete: "bday", class: "bg-light" } %>
-        <%= f.label :username, 'Username*' %>
-        <%= f.input :username,
-                    required: true,
-                    label: false,
-                    input_html: { autocomplete: "username" } %>
         <%= f.label :gender, 'Gender' %>
         <%= f.input :gender,
                     required: false,
