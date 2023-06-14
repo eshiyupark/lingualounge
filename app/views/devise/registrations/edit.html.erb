@@ -39,6 +39,7 @@
         <%= f.input :gender,
                     required: false,
                     label: false,
+                    input_html: { class: "bg-light" },
                     collection: ["male", "female", "prefer not to say"] %>
         <%= f.label :password, 'New Password' %>
         <%= f.input :password,
