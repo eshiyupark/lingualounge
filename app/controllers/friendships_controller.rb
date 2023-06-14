@@ -13,13 +13,13 @@ class FriendshipsController < ApplicationController
       }
     end
     @messages = Message.all
-
   end
 
   def show
     @friendship = Friendship.find(params[:id])
     @message = Message.new
   end
+
 
   def create
     @friend_id = params[:friend_id]

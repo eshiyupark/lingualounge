@@ -3,7 +3,7 @@ import { createConsumer } from "@rails/actioncable"
 
 export default class extends Controller {
   static values = { friendshipId: Number,currentUserId: Number }
-  static targets = ["messages"]
+  static targets = ["messages", "form"]
 
   connect() {
     this.channel = createConsumer().subscriptions.create(
@@ -13,10 +13,13 @@ export default class extends Controller {
     console.log(`Subscribe to the friendship with the id ${this.friendshipIdValue}.`)
   }
 
-  resetForm(event) {
-    event.target.reset()
+  resetForm() {
+    this.formTarget.reset()
   }
-
+  disconnect() {
+    console.log("Unsubscribed from the chatroom")
+    this.channel.unsubscribe()
+  }
   #insertMessageAndScrollDown(data) {
     const currentUserIsSender = this.currentUserIdValue === data.sender_id
     const messageElement = this.#buildMessageElement(currentUserIsSender, data.message)

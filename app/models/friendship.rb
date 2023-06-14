@@ -5,6 +5,9 @@ class Friendship < ApplicationRecord
   validates :status, presence: true, inclusion: { in: ["pending", "accepted", "rejected"] }
   validate :not_yet_friends, on: :create
 
+  def buddy(current_user)
+    participant_one == current_user ? participant_two : participant_one
+  end
 
   private
 
