@@ -1,4 +1,4 @@
-class FriendshipChannel < ApplicationCable::Channel
+class LastmessageChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
     friendship = Friendship.find(params[:id])

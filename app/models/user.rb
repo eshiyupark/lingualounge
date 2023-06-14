@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -20,6 +21,9 @@ class User < ApplicationRecord
   validates :gender, presence: true, inclusion: { in: ["male", "female", "prefer not to say"] }
   validates :date_of_birth, presence: true
   validate :validate_age
+
+
+
 
   def friendships
     friendships_created + friendships_received

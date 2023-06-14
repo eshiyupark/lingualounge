@@ -10,6 +10,9 @@ application.register("friendship-subscription", FriendshipSubscriptionController
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import LastMessageController from "./last_message_controller"
+application.register("last-message", LastMessageController)
+
 import QueueForLoungeController from "./queue_for_lounge_controller"
 application.register("queue-for-lounge", QueueForLoungeController)
 
