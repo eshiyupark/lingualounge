@@ -3,7 +3,11 @@
   <% @friendships_and_buddies.each do |friend| %>
   <div class="chat" >
     <% @user = User.find(friend[:buddy].id) %>
-    <%= cl_image_tag @user.photo.key, height: 50, width: 50, crop: :fill , :style => "border-radius: 5px"%>
+     <% if @user.photo.attached? %>
+        <%= cl_image_tag @user.photo.key, crop: :fill, class: "avatar-flex" %>
+      <% else %>
+        <%= image_tag "https://th.bing.com/th/id/OIP.ZT-Tw8tYy38htqch69vsGQAAAA?pid=ImgDet&rs=1", class: "avatar-flex" %>
+      <% end %>
     <%= link_to friend[:buddy].first_name + " " + friend[:buddy].last_name, user_path(@user) %>
     <%# Status: <%= friend[:friendship].status %>
     <div class="lastmsg">
@@ -43,4 +47,3 @@
 
 
  <%= link_to "Back to Home", root_path, class: "btn-orange" %>
-
