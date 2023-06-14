@@ -1,5 +1,5 @@
-<div class="container">
-  <h2>Languages:</h2>
+<div class="container w-100 h-100 d-flex flex-column align-items-center justify-content-start">
+  <h2>Choose your language:</h2>
   <div class="form" data-controller="session-language">
     <%= form_tag update_language_url, method: :patch do %>
       <% @user_languages.each do |user_language| %>
