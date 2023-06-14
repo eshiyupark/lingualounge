@@ -40,8 +40,8 @@ class UserLanguagesController < ApplicationController
       end
     end
     if @ids.blank?
-      @message = "1"
-      render "devise/registrations/edit", locals: { resource: current_user, resource_name: :user, message: @message }
+      redirect_to edit_user_registration_path
+      flash[:alert] = "You must select at least one language"
     else
       @ids.each do |id|
         unless current_user.languages.map(&:id).include?(id)
