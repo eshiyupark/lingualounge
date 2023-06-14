@@ -13,6 +13,9 @@ application.register("hello", HelloController)
 import QueueForLoungeController from "./queue_for_lounge_controller"
 application.register("queue-for-lounge", QueueForLoungeController)
 
+import SessionLanguageController from "./session_language_controller"
+application.register("session-language", SessionLanguageController)
+
 import StarRatingController from "./star_rating_controller"
 application.register("star-rating", StarRatingController)
 
