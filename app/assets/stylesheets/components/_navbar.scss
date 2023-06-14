@@ -1,12 +1,21 @@
-.navbar-lewagon {
+.custom-navbar {
   justify-content: space-between;
-  background: white;
+  background: rgb(224, 224, 224);
+  display: flex;
+  align-items: center;
+  border: 2px solid white;
+  margin: 10px 6px;
+  border-radius: 15px;
+  box-shadow: 0px 2px 2px 2px;
+  padding: 11px 13px;
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+.custom-navbar-text {
+  font-size: 12px;
+  margin: 2px 0px;
+  padding: 0px;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.custom-navbar-icon {
+  margin: 2px 0px;
 }
