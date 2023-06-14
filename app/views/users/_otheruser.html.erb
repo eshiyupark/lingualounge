@@ -17,19 +17,19 @@
           <% if current_user.sent_request?(@user) %>
             <%= form_tag("/friendships", method: 'delete') do%>
               <%= hidden_field_tag 'friend_id', @user.id %>
-              <%= submit_tag("Cancel Friend Request") %>
+              <%= submit_tag("Cancel Friend Request", class: "btn-orange") %>
             <% end %>
           <!-- is user participant 1? reject or accept (two buttons)-->
           <% else %>
             <!-- accept button -->
             <%= form_tag("/friendships", method: 'patch') do%>
               <%= hidden_field_tag 'friend_id', @user.id %>
-              <%= submit_tag("Accept Friend Request") %>
+              <%= submit_tag("Accept Friend Request", class: "btn-orange") %>
             <% end %>
             <!-- reject button -->
             <%= form_tag("/friendships", method: 'delete') do%>
               <%= hidden_field_tag 'friend_id', @user.id %>
-              <%= submit_tag("Decline Friend Request") %>
+              <%= submit_tag("Decline Friend Request", class: "btn-orange") %>
             <% end %>
           <% end %>
         <% when 'accepted' %>
@@ -47,7 +47,7 @@
         <!-- remove friend button -->
           <%= form_tag("/friendships", method: 'delete') do%>
             <%= hidden_field_tag 'friend_id', @user.id %>
-            <%= submit_tag("Remove Friend") %>
+            <%= submit_tag("Remove Friend", class: "btn-orange") %>
           <% end %>
       <% end %>
     <!--If they are not friends already-->

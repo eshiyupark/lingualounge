@@ -2,6 +2,12 @@
   <div class="d-flex flex-column align-items-center justify-content-around h-75 w-75" data-controller="queue-for-lounge" data-queue-for-lounge-sessions-ids-value="<%= @sessions_ids %>">
     <h1 class="text-center">Looking for a Lounge...</h1>
     <div class="button-container">
+      <h2>Languages:</h2>
+      <ul>
+      <% @sessions.each do |session| %>
+        <li><%= session.language.name.capitalize %></li>
+      <% end %>
+      </ul>
     </div>
   </div>
   <div>

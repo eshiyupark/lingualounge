@@ -34,13 +34,32 @@ class UserLanguagesController < ApplicationController
   end
 
   def update_language #update
-    id_array = params[:user_language_ids]
-    id_array.each do |id|
-      id.to_i
-      @language = UserLanguage.find(id)
-      @language.update(active: true)
+    @user_languages = current_user.user_languages
+    id_array = params[:user_language_ids].map(&:to_i)
+    @user_languages.each do |user_language|
+      if id_array.include?(user_language.id)
+        user_language.update(active: true)
+      else
+        user_language.update(active: false)
+      end
     end
-    redirect_to sessions_queue_path
+    # after update then we need to go to session create which then goes to sessions/queue
+    language_ids = @user_languages.map { |user_language| user_language.language.id if user_language.active? }.reject { |x| x == nil }
+    if Session.where(participant_two_id: nil).where(language_id: language_ids).where.not(participant_one_id: current_user.id).blank?
+      language_ids.each do |id|
+        session = Session.new(participant_one_id: current_user.id, language_id: id)
+        session.save
+      end
+      redirect_to sessions_queue_path
+    else
+      @session = Session.where(participant_two_id: nil).where(language_id: language_ids).sample
+      @session.participant_two = current_user
+      if @session.save
+        redirect_to sessions_show_path(@session)
+      else
+        # render some page with error
+      end
+    end
   end
 
   # come back to this depending on the users/edit page
