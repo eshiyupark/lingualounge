@@ -2,13 +2,13 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="session-language"
 export default class extends Controller {
-  static targets = ["button", "checkboxes"]
+  static targets = ["button", "checkbox"]
   connect() {
-    console.log('updated')
+    console.log('checkbox updated')
   }
 
   disable() {
-    this.checkboxesTargets.forEach((checkbox) => {
+    this.checkboxTargets.forEach((checkbox) => {
       checkbox.addEventListener("change", () => {
         if (this.isChecked()) {
           this.buttonTarget.removeAttribute("disabled");
@@ -20,7 +20,6 @@ export default class extends Controller {
   }
 
   isChecked() {
-    return this.checkboxesTargets.some((checkbox) => checkbox.checked);
+    return this.checkboxTargets.some((checkbox) => checkbox.checked);
   }
 }
-
