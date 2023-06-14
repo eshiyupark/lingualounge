@@ -8,6 +8,7 @@
 @import "font-awesome";
 @import "star-rating.js/dist/star-rating.css";
 @import "tom-select/dist/scss/tom-select";
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 
 // Your CSS partials
@@ -18,4 +19,8 @@
 body {
   width: 100vw;
   background-color: $main-blue !important;
+}
+
+h1, h2, h3, h4, h5, p, a, button {
+  font-family: 'Poppins', sans-serif;
 }

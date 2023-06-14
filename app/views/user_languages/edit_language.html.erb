@@ -6,9 +6,9 @@
       <%= user_language.language.name.capitalize %>
     <% end %>
 
-    <%= submit_tag 'Take me to Lounge!' %>
+    <%= submit_tag 'Take me to Lounge!', class: "btn-orange" %>
   <% end %>
-  
+   <%= link_to "Back to Home", root_path, class: "btn-orange" %>
 </div>
 
       <%#= form_tag("/sessions", method: "post", class: "w-100") do %>
