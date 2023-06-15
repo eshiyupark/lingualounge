@@ -1,0 +1,44 @@
+
+<% case status %>
+  <% when 'pending' %>
+  <!-- is current user participant 1? i.e. sender of request - cancel-->
+    <% if current_user.sent_request?(user) %>
+      <%= form_tag("/friendships", method: 'delete') do%>
+        <%= hidden_field_tag 'friend_id', user.id %>
+        <%= submit_tag("Cancel Friend Request", class: "btn-orange-small") %>
+      <% end %>
+      <!-- is user participant 1? reject or accept (two buttons)-->
+      <% else %>
+            <!-- accept button -->
+      <div class="acc-rej-btn-div">
+      <%= form_tag("/friendships", method: 'patch') do%>
+        <%= hidden_field_tag 'friend_id', user.id %>
+        <%= submit_tag("Accept Friend Request", class: "btn-orange-small") %>
+      <% end %>
+            <!-- reject button -->
+      <%= form_tag("/friendships", method: 'delete') do%>
+        <%= hidden_field_tag 'friend_id', user.id %>
+        <%= submit_tag("Decline Friend Request", class: "btn-orange-small") %>
+        <% end %>
+      <% end %>
+
+      <% when 'accepted' %>
+        <% if user.highly_rated? %>
+          <div class="review-form-container">
+            <p class="m-0">Highly rated! (insert badge icon)</p>
+          </div>
+        <% end %>
+        <div class="review-form-container my-2">
+          <h4 class="m-0"><%= user.first_name.capitalize %>'s Languages:</h4>
+          <% user.languages.each do |language| %>
+            <p class="m-0"><%= language.name.capitalize %></p>
+          <% end %>
+        </div>
+        <!-- remove friend button -->
+        <%= form_tag("/friendships", method: 'delete') do%>
+          <%= hidden_field_tag 'friend_id', user.id %>
+          <%= submit_tag("Remove Friend", class: "btn-orange-small") %>
+        <% end %>
+      </div>
+      <% end %>
+    <!--If they are not friends already-->
