@@ -22,3 +22,18 @@
 .btn-orange:visited{
   text-decoration: none !important;
 }
+.btn-orange-small{
+  background-color: #F99417;
+  border: 2px solid #FFFFFF;
+  color: #FFFFFF;
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 5px 0;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+}
+.acc-rej-btn-div{
+  display: flex;
+}

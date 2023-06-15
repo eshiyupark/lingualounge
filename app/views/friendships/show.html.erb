@@ -2,18 +2,24 @@
   data-friendship-subscription-friendship-id-value="<%= @friendship.id %>"
   data-friendship-subscription-current-user-id-value="<%= current_user.id %>"
 >
-  <% if @friendship.status == "accepted"%>
-   <h4> Friend </h4>
-  <% elsif @friendship.status == "pending"%>
-    <h4> Request Sent </h4>
-  <% else %>
-   <h4>Not Friend</h4>
-  <% end %>
+  <div class="chat-header">
+    <p>
+      <%= link_to "<", friendships_path%>
+      <% if @friendship.buddy(current_user).photo.attached? %>
+        <%= cl_image_tag @friendship.buddy(current_user).photo.key, crop: :fill, class: "profile-pic" %>
+      <% else %>
+        <%= image_tag "https://th.bing.com/th/id/OIP.ZT-Tw8tYy38htqch69vsGQAAAA?pid=ImgDet&rs=1", class: "avatar-flex" %>
+      <% end %>
+
+      <%= @friendship.buddy(current_user).first_name%> <%= @friendship.buddy(current_user).last_name%>
+    </p>
+  </div>
+
   <div class="messages" data-friendship-subscription-target="messages">
     <% @friendship.messages.each do |message| %>
       <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
         <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
-          <%= render "messages/message", message: message %>
+           <%= render "messages/message", message: message %>
         </div>
       </div>
     <% end %>

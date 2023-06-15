@@ -14,7 +14,7 @@ export default class extends Controller {
       }}
     )
 
-    console.log("The last-message controller is connected now")
+    console.log("The last-message controller is connected")
   }
 
   disconnect() {

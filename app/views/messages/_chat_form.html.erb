@@ -1,13 +1,17 @@
-<%= simple_form_for [friendship, message],
-    html: {
-      data: { action: "turbo:submit-end->friendship-subscription#resetForm", friendship_subscription_target:"form" },
-      class: "d-flex"
-      } do |f|
-  %>
-    <%= f.input :content,
-      label: false,
-      placeholder: "Type message",
-      wrapper_html: {class: "flex-grow-1"}
+<div class="submit-form">
+  <%= simple_form_for [friendship, message],
+      html: {
+        data: { action: "turbo:submit-end->friendship-subscription#resetForm", friendship_subscription_target:"form" },
+        class: "d-flex"
+        } do |f|
     %>
-    <%= f.submit "Send", class: "btn btn-primary mb-3"%>
-  <% end %>
+      <%= f.input :content,
+        label: false,
+        placeholder: "Type something...",
+        wrapper_html: {class: "flex-grow-1"}
+      %>
+      <%= button_tag(type: 'submit', class: "send_btn") do %>
+        <i class="fa-regular fa-paper-plane"></i>
+      <% end %>
+    <% end %>
+</div>
