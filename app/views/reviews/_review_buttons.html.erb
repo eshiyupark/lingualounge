@@ -1,15 +1,15 @@
 <%= simple_form_for [session, review], url: new_review_path(session),
-          html: {
-            data: {controller:"review-buttons", action: "click->review-buttons#changeTextRate"},
-            class: "w-100 d-flex flex-column align-items-center justify-content-center"
-            } do |f| %>
-        <%= f.input :rating, label: false, collection: (1..5).to_a, input_html: {data: {controller: "star-rating", options: {tooltip: false}}} %>
-        <%= f.submit "Submit review", class: "btn-orange" %>
-      <% end %>
-      <% unless current_user.is_friend?(user) %> <!-- send friend req-->
-        <%= form_tag("/friendships", method: 'post', class: "w-100") do%>
-          <%= hidden_field_tag 'friend_id', user.id %>
-          <%= submit_tag("Send Friend Request", class: "btn-orange", data: { controller:"review-buttons", action: "click->review-buttons#changeTextRequest" }) %>
-        <% end %>
-      <% end %>
-    </div>
+  html: {
+    data: {controller:"review-buttons", action: "turbo:submit-end->review-buttons#changeTextRate"},
+    class: "w-100 d-flex flex-column align-items-center justify-content-center"
+    } do |f| %>
+    <%= f.input :rating, label: false, collection: (1..5).to_a, input_html: {data: {controller: "star-rating", options: {tooltip: false}}} %>
+    <%= f.submit "Submit review", class: "btn-orange" %>
+    <%# , data: { controller:"review-buttons", action: "click->review-buttons#changeTextRate" } %>
+  <% end %>
+  <% unless current_user.is_friend?(user) %> <!-- send friend req-->
+    <%= form_tag("/friendships", method: 'post', class: "w-100") do%>
+    <%= hidden_field_tag 'friend_id', user.id %>
+    <%= submit_tag("Send Friend Request", class: "btn-orange", data: { controller:"review-buttons", action: "click->review-buttons#changeTextRequest" }) %>
+  <% end %>
+<% end %>
