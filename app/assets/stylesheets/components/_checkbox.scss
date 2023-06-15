@@ -1,0 +1,25 @@
+.checkbox {
+  display: flex;
+  font-size: 24px;
+  align-items: center;
+
+  p {
+    margin-left: 30px;
+    margin-bottom: 0px;
+    font-size: 24px;
+    color: $mid-blue;
+  }
+
+  input[type=checkbox] {
+    width: 24px;
+    height: 24px;
+
+    input[type=checkbox]:checked {
+      background-color: $main-blue !important;
+    }
+  }
+}
+
+.lounge-button {
+  margin-top: 30px;
+}
