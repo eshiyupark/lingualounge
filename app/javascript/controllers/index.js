@@ -19,6 +19,9 @@ application.register("last-message", LastMessageController)
 import QueueForLoungeController from "./queue_for_lounge_controller"
 application.register("queue-for-lounge", QueueForLoungeController)
 
+import ReviewButtonsController from "./review_buttons_controller"
+application.register("review-buttons", ReviewButtonsController)
+
 import SessionLanguageController from "./session_language_controller"
 application.register("session-language", SessionLanguageController)
 
