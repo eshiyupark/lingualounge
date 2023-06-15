@@ -36,6 +36,7 @@ class FriendshipsController < ApplicationController
     @friend_id = params[:friend_id] #participant one
     @friendship = Friendship.where(participant_one_id: @friend_id, participant_two_id: current_user.id)[0]
     @friendship.update(status: 'accepted', participant_one_id: @friend_id, participant_two_id: current_user.id)
+    redirect_to user_path(@friend_id)
   end
 
   def destroy # decline or remove
@@ -43,6 +44,7 @@ class FriendshipsController < ApplicationController
     @friendship1 = Friendship.where(participant_one_id: @friend_id, participant_two_id: current_user.id).first
     @friendship2 = Friendship.where(participant_one_id: current_user.id, participant_two_id: @friend_id).first
     @friendship1.nil? ? @friendship2.destroy : @friendship1.destroy
+    redirect_to friendships_path
   end
 
   private
