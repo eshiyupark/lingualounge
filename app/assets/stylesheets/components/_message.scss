@@ -3,8 +3,6 @@
   padding: 4px;
 }
 
-// To style the message itself
-
 .sender-style {
   background-color: #F7C59F;
   width: 70%;
@@ -45,6 +43,7 @@
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   border: white 1px solid;
 }
+
 
 .messages-container{
   background-color: white;
@@ -103,4 +102,9 @@
     color: #2069A0;
     padding: 2px;
   }
+}
+.messages{
+  // background-color: #F7C59F;
+  position: relative;
+  overflow: hidden;
 }

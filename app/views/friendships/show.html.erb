@@ -1,4 +1,7 @@
-<div class="w-100 h-100 d-flex flex-column align-items-center justify-content-start">
+<div data-controller="friendship-subscription"
+  data-friendship-subscription-friendship-id-value="<%= @friendship.id %>"
+  data-friendship-subscription-current-user-id-value="<%= current_user.id %>"
+>
   <div class="chat-header">
     <p class="p-0 m-0">
       <%= link_to "<", friendships_path, class: "p-0 my-2 mx-2" %>
