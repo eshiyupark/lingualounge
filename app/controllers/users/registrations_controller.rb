@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  after_action :remove_notice, only: [:create, :update]
 
   # GET /resource/sign_up
   # def new
@@ -59,4 +60,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def remove_notice
+    flash.discard(:notice) #http://api.rubyonrails.org/v5.1/classes/ActionDispatch/Flash/FlashHash.html#method-i-discard
+  end
 end

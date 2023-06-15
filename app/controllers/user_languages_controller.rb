@@ -23,7 +23,6 @@ class UserLanguagesController < ApplicationController
         end
       end
       redirect_to root_path
-      flash[:notice] = "You're all set!"
     end
   end
 
