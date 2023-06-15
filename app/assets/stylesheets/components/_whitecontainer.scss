@@ -1,5 +1,5 @@
 .button-container {
-  background-color: rgb(212, 212, 212);
+  background-color: $main-gray;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -13,7 +13,7 @@
 }
 
 .review-form-container {
-  background-color: rgb(212, 212, 212);
+  background-color: $main-gray;
   display: flex;
   justify-content: center;
   flex-direction: column;
