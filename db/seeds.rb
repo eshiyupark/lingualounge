@@ -44,9 +44,9 @@ puts "Creating user_language randomly for all users (All have English, + 1 rando
 User.all.each do |user|
   UserLanguage.create(user_id: user.id, language_id: Language.where(name: "English")[0].id)
   if user.username == "jamieheo"
-    UserLanguage.create(user_id: user.id, language_id: Language.where(name: "Japanese")[0])
+    UserLanguage.create(user_id: user.id, language_id: Language.where(name: "Japanese")[0].id)
   else
-    UserLanguage.create(user_id: user.id, language_id: Language.where.not(name: "english").sample.id)
+    UserLanguage.create(user_id: user.id, language_id: Language.where.not(name: "English").sample.id)
   end
 end
 puts "Added language associations (English + random) to all users. Added English + Japanese to jamieheo"
