@@ -1,28 +1,28 @@
-<div class="container" data-controller="friendship-subscription"
-  data-friendship-subscription-friendship-id-value="<%= @friendship.id %>"
-  data-friendship-subscription-current-user-id-value="<%= current_user.id %>"
->
+<div class="w-100 h-100 d-flex flex-column align-items-center justify-content-start">
   <div class="chat-header">
-    <p>
-      <%= link_to "<", friendships_path%>
+    <p class="p-0 m-0">
+      <%= link_to "<", friendships_path, class: "p-0 my-2 mx-2" %>
       <% if @friendship.buddy(current_user).photo.attached? %>
-        <%= cl_image_tag @friendship.buddy(current_user).photo.key, crop: :fill, class: "profile-pic" %>
+        <%= cl_image_tag @friendship.buddy(current_user).photo.key, crop: :fill, class: "avatar-large" %>
       <% else %>
-        <%= image_tag "https://th.bing.com/th/id/OIP.ZT-Tw8tYy38htqch69vsGQAAAA?pid=ImgDet&rs=1", class: "avatar-flex" %>
+        <%= image_tag "https://th.bing.com/th/id/OIP.ZT-Tw8tYy38htqch69vsGQAAAA?pid=ImgDet&rs=1", class: "avatar-large" %>
       <% end %>
-
-      <%= @friendship.buddy(current_user).first_name%> <%= @friendship.buddy(current_user).last_name%>
+      <p class="mx-2 my-0"><%= @friendship.buddy(current_user).first_name%> <%= @friendship.buddy(current_user).last_name%></p>
     </p>
   </div>
-
-  <div class="messages" data-friendship-subscription-target="messages">
-    <% @friendship.messages.each do |message| %>
-      <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
-        <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
-           <%= render "messages/message", message: message %>
+  <div class="container" data-controller="friendship-subscription"
+    data-friendship-subscription-friendship-id-value="<%= @friendship.id %>"
+    data-friendship-subscription-current-user-id-value="<%= current_user.id %>"
+  >
+    <div class="messages" data-friendship-subscription-target="messages">
+      <% @friendship.messages.each do |message| %>
+        <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
+          <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
+            <%= render "messages/message", message: message %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
+    <%= render "messages/chat_form", friendship: @friendship, message: @message %>
   </div>
-  <%= render "messages/chat_form", friendship: @friendship, message: @message %>
 </div>

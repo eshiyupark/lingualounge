@@ -26,21 +26,27 @@ User.create!(email: "ayanthisaparamadu@gmail.com", password: "secret", username:
 User.create!(email: "monicapham@gmail.com", password: "secret", username: "monicapham", first_name: "Monica", last_name: "Pham", date_of_birth: "1994-04-03", gender: "female")
 puts "Created 5 users"
 
-puts "Creating languages (English, Japanese, Korean, Spanish, Chinese)..."
-Language.create!(name: "english")
-Language.create!(name: "japanese")
-Language.create!(name: "korean")
-Language.create!(name: "spanish")
-Language.create!(name: "chinese")
-puts "Created 5 languages."
-
-puts "Creating 1 friendship between johndoe and jamieheo..."
-Friendship.create!(status: "pending", participant_one_id: user_one.id, participant_two_id: user_two.id)
-puts "Created 1 friendship between johndoe (participant one) and jamieheo (participant two)"
+puts "Creating languages..."
+Language.create!(name: "English")
+Language.create!(name: "Japanese")
+Language.create!(name: "Korean")
+Language.create!(name: "Portuguese")
+Language.create!(name: "Mandarin")
+Language.create!(name: "Cantonese")
+Language.create!(name: "Sinhalese")
+Language.create!(name: "German")
+Language.create!(name: "French")
+Language.create!(name: "Russian")
+Language.create!(name: "Spanish")
+puts "Created languages."
 
 puts "Creating user_language randomly for all users (All have English, + 1 random language)..."
 User.all.each do |user|
-  UserLanguage.create(user_id: user.id, language_id: Language.where(name: "english")[0].id)
-  UserLanguage.create(user_id: user.id, language_id: Language.where.not(name: "english").sample.id)
+  UserLanguage.create(user_id: user.id, language_id: Language.where(name: "English")[0].id)
+  if user.username == "jamieheo"
+    UserLanguage.create(user_id: user.id, language_id: Language.where(name: "Japanese")[0])
+  else
+    UserLanguage.create(user_id: user.id, language_id: Language.where.not(name: "english").sample.id)
+  end
 end
-puts "Added language association (English + random) to all users."
+puts "Added language associations (English + random) to all users. Added English + Japanese to jamieheo"
