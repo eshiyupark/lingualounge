@@ -10,7 +10,9 @@ export default class extends Controller {
       { channel: "FriendshipChannel", id: this.friendshipIdValue },
       { received: data => this.#insertMessageAndScrollDown(data) }
     )
-    console.log(`Subscribe to the friendship with the id ${this.friendshipIdValue}.`)
+    console.log(`Subscribe to the friendship with the id  ${this.friendshipIdValue}.`)
+    this.messagesTarget.scrollTo({left: 0, top: this.messagesTarget.scrollHeight, behavior: "smooth"})
+
   }
 
   resetForm() {
@@ -24,7 +26,8 @@ export default class extends Controller {
     const currentUserIsSender = this.currentUserIdValue === data.sender_id
     const messageElement = this.#buildMessageElement(currentUserIsSender, data.message)
     this.messagesTarget.insertAdjacentHTML("beforeend", messageElement)
-    this.messagesTarget.scrollTo(0, this.messagesTarget.scrollHeight)
+    console.log(this.messagesTarget.scrollHeight)
+    this.messagesTarget.scrollTo({left: 0, top: this.messagesTarget.scrollHeight, behavior: "smooth"})
   }
   #buildMessageElement(currentUserIsSender, message) {
     return `

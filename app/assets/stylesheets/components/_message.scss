@@ -49,7 +49,7 @@
   background-color: white;
   width: 100%;
   padding: 10px;
-  margin-top: 5px;
+  margin-top: 83px;
 }
 
 .chat-header{
@@ -62,6 +62,8 @@
   align-items: center;
   background-color: #2069A0;
   min-height: 80px;
+  position: fixed;
+  z-index: 1;
   p {
     margin-left: 10px;
   }
@@ -87,7 +89,7 @@
 
 .submit-form {
   position: fixed;
-  bottom: 45px;
+  bottom: 60px;
   left: 0;
   width: 100%;
   background-color: #f9f9f9;
@@ -106,5 +108,8 @@
 .messages{
   // background-color: #F7C59F;
   position: relative;
-  overflow: hidden;
+  overflow: scroll;
+  margin-bottom: 40px;
+  padding-top: 80px;
+  height: 695px ;
 }
