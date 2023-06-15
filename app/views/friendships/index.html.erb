@@ -1,44 +1,39 @@
-<div class="chat-header">
-  <p><%= link_to "< ", root_path , style: "text-decoration: none;"%></p>
-  <p> Chats </p>
-</div>
-<div class="container">
-
-
-  <% @friendships_and_buddies.each do |friend| %>
-    <div class="chat" >
-      <% @user = User.find(friend[:buddy].id) %>
-      <% if @user.photo.attached? %>
-        <%= cl_image_tag @user.photo.key, crop: :fill, class: "profile-pic" %>
-      <% else %>
-        <%= image_tag "https://th.bing.com/th/id/OIP.ZT-Tw8tYy38htqch69vsGQAAAA?pid=ImgDet&rs=1", class: "avatar-flex" %>
-      <% end %>
-
-      <div class="lastmsg">
-
-        <%= link_to friend[:buddy].first_name + " " + friend[:buddy].last_name, user_path(@user) %>
-        <% if friend[:friendship].status == "accepted" %>
-          <% arr = [] %>
-          <% @messages.each do |msg| %>
-            <%  if msg.friendship_id  == friend[:friendship].id %>
-              <% arr.push(msg) %>
-            <% end %>
-          <% end %>
-          <%# <%= link_to "open chat" , friendship_path(friend[:friendship].id)%>
-          <div class="items">
-            <%  if arr.last.present? %>
-              <%= render 'message_preview', message: arr.last[:content], friendship: friend[:friendship]%>
-            <% else %>
-              <%= render 'message_preview', message: "No messages", friendship: friend[:friendship]%>
-            <%end %>
-
+<div class="w-100 h-100 d-flex flex-column align-items-center justify-content-start">
+  <div class="chat-header">
+    <p class="p-0 my-2 mx-2"><%= link_to "< ", root_path , style: "text-decoration: none;" %></p>
+    <p class="p-0 m-0"> Chats </p>
+  </div>
+  <div class="messages-container">
+    <% @friendships_and_buddies.each do |friend| %>
+      <div class="chat">
+        <% @user = User.find(friend[:buddy].id) %>
+        <% if @user.photo.attached? %>
+          <%= cl_image_tag @user.photo.key, crop: :fill, class: "avatar-large" %>
         <% else %>
-          <%= render 'accept_reject', status: friend[:friendship].status, user: friend[:buddy]%>
+          <%= image_tag "https://th.bing.com/th/id/OIP.ZT-Tw8tYy38htqch69vsGQAAAA?pid=ImgDet&rs=1", class: "avatar-large" %>
         <% end %>
+        <div class="lastmsg">
+          <%= link_to friend[:buddy].first_name + " " + friend[:buddy].last_name, user_path(@user) %>
+          <% if friend[:friendship].status == "accepted" %>
+            <% arr = [] %>
+            <% @messages.each do |msg| %>
+              <%  if msg.friendship_id  == friend[:friendship].id %>
+                <% arr.push(msg) %>
+              <% end %>
+            <% end %>
+            <%# <%= link_to "open chat" , friendship_path(friend[:friendship].id)%>
+            <div class="items">
+              <% if arr.last.present? %>
+                <%= render 'message_preview', message: arr.last[:content], friendship: friend[:friendship]%>
+              <% else %>
+                <%= render 'message_preview', message: "No messages", friendship: friend[:friendship]%>
+              <%end %>
+            </div>
+          <% else %>
+            <%= render 'accept_reject', status: friend[:friendship].status, user: friend[:buddy]%>
+          <% end %>
+        </div>
       </div>
-
-      </div>
-
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
