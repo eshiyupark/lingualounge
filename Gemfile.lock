@@ -311,7 +311,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   faker
-  font-awesome-sass (~> 6.1)
+  font-awesome-sass (~> 6.4.0)
   jbuilder
   jsbundling-rails
   noticed (~> 1.6)

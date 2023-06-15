@@ -13,6 +13,7 @@ class FriendshipsController < ApplicationController
       }
     end
     @messages = Message.all
+    @friends_navbar_active = "d-flex flex-column justify-content-center align-items-center p-2 custom-navbar-border-bottom"
   end
 
   def show
