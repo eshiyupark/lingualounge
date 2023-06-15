@@ -15,10 +15,14 @@
   margin: 2px 0px;
   padding: 0px;
   font-weight: bold;
+  color: $main-blue;
 }
 
 .custom-navbar-icon {
   margin: 2px 0px;
+  i {
+    color: $main-blue;
+  }
 }
 
 .custom-navbar-border-bottom {
@@ -27,14 +31,14 @@
   justify-content: center;
   align-items: center;
   padding: 4px;
-  border: 2.5px;
+  border: 2.5px #F99417;
   border-left: 0;
   border-right: 0;
   border-top: 0;
   border-top-style: none;
   border-left-style: none;
   border-right-style: none;
-  border-bottom-style: outset;
+  border-bottom-style: solid;
 }
 
 .custom-navbar-no-border {
