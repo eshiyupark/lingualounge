@@ -1,33 +1,33 @@
 <div class=<%= "#{user_signed_in? ? 'custom-navbar' : 'd-none'}" %>>
   <% if user_signed_in? %>
     <a href="/">
-      <div class="d-flex flex-column justify-content-center align-items-center mx-2">
+      <div class=<%= "#{@home_navbar_active ? 'custom-navbar-border-bottom' : 'custom-navbar-no-border'}" %>>
         <div class="custom-navbar-icon">
-          <i class="fa-solid fa-house fa-xl"></i>
+          <i class="fa-solid fa-house fa-lg"></i>
         </div>
         <p class="custom-navbar-text">HOME</p>
       </div>
     </a>
     <a href="/friendships">
-      <div class="d-flex flex-column justify-content-center align-items-center mx-2">
+      <div class=<%= "#{@friends_navbar_active ? 'custom-navbar-border-bottom' : 'custom-navbar-no-border'}" %>>
         <div class="custom-navbar-icon">
-          <i class="fa-solid fa-user-group fa-xl"></i>
+          <i class="fa-solid fa-user-group fa-lg"></i>
         </div>
         <p class="custom-navbar-text">FRIENDS</p>
       </div>
     </a>
     <a href=<%= "/users/#{current_user.id}" %>>
-      <div class="d-flex flex-column justify-content-center align-items-center mx-2">
+      <div class=<%= "#{@profile_navbar_active ? 'custom-navbar-border-bottom' : 'custom-navbar-no-border'}" %>>
         <div class="custom-navbar-icon">
-          <i class="fa-solid fa-user fa-xl"></i>
+          <i class="fa-solid fa-user fa-lg"></i>
         </div>
         <p class="custom-navbar-text">PROFILE</p>
       </div>
     </a>
     <%= link_to destroy_user_session_path, data: {turbo_method: :delete} do %>
-      <div class="d-flex flex-column justify-content-center align-items-center mx-2">
+      <div class='custom-navbar-no-border'>
         <div class="custom-navbar-icon">
-          <i class="fa-solid fa-right-from-bracket fa-xl"></i>
+          <i class="fa-solid fa-right-from-bracket fa-lg"></i>
         </div>
         <p class="custom-navbar-text">LOGOUT</p>
       </div>

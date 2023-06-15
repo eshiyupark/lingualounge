@@ -1,21 +1,46 @@
 .custom-navbar {
   justify-content: space-between;
-  background: rgb(224, 224, 224);
+  background: rgb(212, 212, 212);
   display: flex;
   align-items: center;
-  border: 2px solid white;
-  margin: 10px 6px;
-  border-radius: 15px;
-  box-shadow: 0px 2px 2px 2px;
-  padding: 11px 13px;
+  border: 3px solid white;
+  margin: 12px 10px;
+  border-radius: 22px;
+  box-shadow: 0px 3px 10px rgb(48, 48, 48);
+  padding: 0px 16px;
 }
 
 .custom-navbar-text {
-  font-size: 12px;
+  font-size: 10px;
   margin: 2px 0px;
   padding: 0px;
+  font-weight: bold;
 }
 
 .custom-navbar-icon {
   margin: 2px 0px;
+}
+
+.custom-navbar-border-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  border: 2.5px;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom-style: outset;
+}
+
+.custom-navbar-no-border {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
 }

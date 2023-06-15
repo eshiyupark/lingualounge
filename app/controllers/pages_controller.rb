@@ -6,5 +6,6 @@ class PagesController < ApplicationController
       redirect_to new_user_session_path
     end
     @users = User.all
+    @home_navbar_active = "custom-navbar-border-bottom"
   end
 end
