@@ -1,25 +1,31 @@
 .message-row {
-  margin-bottom: 10px;
-  padding: 8px;
-}
-
-// To style the message itself
-.sender-style, .receiver-style {
-  width: 70%;
-  max-width: 400px;
-  border-radius: 20px;
-  padding: 8px;
-  min-height: 40px;
+  margin: 2px;
+  padding: 4px;
 }
 
 .sender-style {
   background-color: #F7C59F;
+  width: 70%;
+  max-width: 400px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding: 11px;
+  min-height: 80px;
 }
 
 .receiver-style {
   background-color: #2069A0;
   color: white;
+  width: 70%;
+  max-width: 400px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding: 11px;
+  min-height: 80px;
 }
+
 .chat{
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   background-color: white;
@@ -27,7 +33,9 @@
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+  width: 100%;
 }
+
 .profile-pic {
   border-radius: 4px;
   width: 15%;
@@ -36,7 +44,16 @@
   border: white 1px solid;
 }
 
+
+.messages-container{
+  background-color: white;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+}
+
 .chat-header{
+  width: 100%;
   padding: 10px;
   display: flex;
   color:  white;
@@ -44,10 +61,11 @@
   display: flex;
   align-items: center;
   background-color: #2069A0;
-  p{
+  min-height: 80px;
+  p {
     margin-left: 10px;
   }
-  a{
+  a {
     color:  white;
     text-decoration: none;
   }
@@ -56,11 +74,11 @@
 .lastmsg{
   margin-left: 10px;
   color: black;
-  p{
+  p {
     font-size: small;
     color: rgb(58, 58, 58);
   }
-  .bud-name{
+  .bud-name {
     font-size: large;
     color:  rgb(10, 10, 10);
     text-decoration: none;
@@ -76,10 +94,11 @@
   padding: 5px;
   box-sizing: border-box;
 }
+
 .send_btn{
   background-color: white;
   border: none;
-  i{
+  i {
     color: #2069A0;
     padding: 2px;
   }
