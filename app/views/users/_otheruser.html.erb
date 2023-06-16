@@ -35,7 +35,8 @@
       <% when 'accepted' %>
         <% if @user.highly_rated? %>
         <div class="review-form-container">
-          <p class="m-0">Highly rated! (insert badge icon)</p>
+          <%= image_tag("highly-rated.jpg", size: "25x40") %>
+          <p class="m-0">Highly rated!</p>
         </div>
         <% end %>
         <div class="review-form-container my-2">
