@@ -14,9 +14,13 @@
 </div>
 -->
 
-<div class="w-100 h-100 d-flex flex-column align-items-center justify-content-start">
+<div class="w-100 h-100 d-flex flex-column align-items-center justify-content-around">
   <div class="d-flex flex-column align-items-center justify-content-around h-75 w-75 animate__animated animate__backInRight animation-content animate__faster">
-    <h1 class="text-center">Lingua Lounge</h1>
+    <div class="d-flex flex-column align-items-center justify-content-center w-100">
+      <h1 class="text-center mb-2">Lingua Lounge</h1>
+      <p class="m-0 p-0 text-white">Unlock the world.</p>
+      <p class="m-0 p-0 text-white">One conversation at a time.</p>
+    </div>
     <div class="button-container">
       <%= link_to "Enter Lounge", edit_language_path, class: "btn-orange" %>
       <%= link_to "My Friends", friendships_path, class: "btn-orange" %>
