@@ -6,11 +6,11 @@
     <p class="p-0 m-0">
       <%= link_to "<", friendships_path, class: "p-0 my-2 mx-2" %>
       <% if @friendship.buddy(current_user).photo.attached? %>
-        <%= cl_image_tag @friendship.buddy(current_user).photo.key, crop: :fill, class: "avatar-large" %>
+        <%= cl_image_tag @friendship.buddy(current_user).photo.key, crop: :fill, class: "avatar-small" %>
       <% else %>
         <%= image_tag "https://th.bing.com/th/id/OIP.ZT-Tw8tYy38htqch69vsGQAAAA?pid=ImgDet&rs=1", class: "avatar-large" %>
       <% end %>
-      <p class="mx-2 my-0"><%= @friendship.buddy(current_user).first_name%> <%= @friendship.buddy(current_user).last_name%></p>
+      <p class="mx-2 my-0 text-white"><%= @friendship.buddy(current_user).first_name%> <%= @friendship.buddy(current_user).last_name%></p>
     </p>
   </div>
   <div class="messages" data-friendship-subscription-target="messages">

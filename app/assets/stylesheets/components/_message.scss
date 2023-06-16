@@ -4,7 +4,7 @@
 }
 
 .sender-style {
-  background-color: #F7C59F;
+  background-color: #FCBC6D;
   width: 70%;
   max-width: 400px;
   border-top-left-radius: 20px;
@@ -12,11 +12,13 @@
   border-bottom-left-radius: 20px;
   padding: 11px;
   min-height: 80px;
+  p {
+    color: black;
+  }
 }
 
 .receiver-style {
   background-color: #2069A0;
-  color: white;
   width: 70%;
   max-width: 400px;
   border-top-right-radius: 20px;
@@ -24,6 +26,9 @@
   border-bottom-left-radius: 20px;
   padding: 11px;
   min-height: 80px;
+  p {
+    color: white;
+  }
 }
 
 .chat{
@@ -60,7 +65,7 @@
   font-size: 14px;
   display: flex;
   align-items: center;
-  background-color: #2069A0;
+  background-color: $main-blue;
   min-height: 80px;
   position: fixed;
   z-index: 1;
@@ -76,14 +81,20 @@
 .lastmsg{
   margin-left: 10px;
   color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
   p {
     font-size: small;
-    color: rgb(58, 58, 58);
+    margin: 0px;
   }
   .bud-name {
     font-size: large;
-    color:  rgb(10, 10, 10);
     text-decoration: none;
+  }
+  a {
+    color: $main-blue !important;
   }
 }
 

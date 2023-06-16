@@ -9,7 +9,6 @@
 @import "star-rating.js/dist/star-rating.css";
 @import "tom-select/dist/scss/tom-select";
 
-
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
@@ -52,4 +51,8 @@ a:active {
 
 ul {
   list-style-type: none;
+}
+
+.animation-content {
+  animation-fill-mode: none;
 }

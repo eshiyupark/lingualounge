@@ -1,4 +1,4 @@
-<div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+<div class="w-100 h-100 d-flex flex-column align-items-center justify-content-start animate__animated animate__backInRight animation-content animate__faster">
   <div class="d-flex flex-column align-items-center justify-content-around h-75 w-75">
     <div class="d-flex flex-column align-items-center justify-content-center my-4 w-100">
       <% if @user.photo.attached? %>
@@ -35,7 +35,8 @@
       <% when 'accepted' %>
         <% if @user.highly_rated? %>
         <div class="review-form-container">
-          <p class="m-0">Highly rated! (insert badge icon)</p>
+          <%= image_tag("highly-rated.jpg", size: "25x40") %>
+          <p class="m-0">Highly rated!</p>
         </div>
         <% end %>
         <div class="review-form-container my-2">
