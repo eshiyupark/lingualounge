@@ -4,7 +4,9 @@
     <p class="p-0 m-0 text-white"> Chats </p>
   </div>
   <% if @friendships_and_buddies.blank? %>
-    <h4 class="my-5">No connections yet.</h4>
+    <div class="messages-container">
+      <h4 class="my-5 text-center">No connections yet.</h4>
+    </div>
   <% else %>
     <div class="messages-container">
       <% @friendships_and_buddies.each do |friend| %>
