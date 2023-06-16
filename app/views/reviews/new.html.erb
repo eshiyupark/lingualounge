@@ -10,19 +10,9 @@
         <h2><%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></h2>
       </div>
     </div>
-    <div class="review-form-container">
+    <div class="review-form-container" data-controller="review-buttons">
       <h4 class="text-center">Rate your experience</h4>
-      <%= simple_form_for [@session, @review], url: new_review_path(@session), html: { class: "w-100 d-flex flex-column align-items-center justify-content-center"} do |f| %>
-        <%= f.input :rating, label: false, collection: (1..5).to_a, input_html: {data: {controller: "star-rating", options: {tooltip: false}}} %>
-        <%= f.submit "Submit review", class: "btn-orange" %>
-      <% end %>
-      <% unless current_user.is_friend?(@user) %> <!-- send friend req-->
-        <%= form_tag("/friendships", method: 'post', class: "w-100") do%>
-          <%= hidden_field_tag 'friend_id', @user.id %>
-          <%= submit_tag("Send Friend Request", class: "btn-orange") %>
-        <% end %>
-      <% end %>
-    </div>
+      <%= render "review_buttons", session: @session, review: @review, user: @user %>
     <%= link_to "Continue", root_path, class: "btn-orange" %>
   </div>
 </div>

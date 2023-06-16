@@ -10,6 +10,18 @@
   text-align: center;
   text-decoration: none !important;
 }
+.btn-light-orange {
+  background-color: #FCBC6D;
+  border: 2px solid #ffffff;
+  color: #FFFFFF;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.4);
+  margin: 5px 0;
+  width: 100%;
+  text-align: center;
+  text-decoration: none !important;
+}
 
 .btn-orange:hover {
   text-decoration: none !important;
@@ -37,3 +49,7 @@
 .acc-rej-btn-div{
   display: flex;
 }
+
+// .btn-orange:active {
+//   background-color: rgb(248, 202, 75)
+// }

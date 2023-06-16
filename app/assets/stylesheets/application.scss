@@ -16,7 +16,9 @@
 
 body {
   width: 100vw;
-  background-color: $main-gray !important;
+  background-image: asset_url('white-bg.png') !important;
+  background-size: 150px 100px;
+  background-repeat: repeat;
 }
 
 h1 {
