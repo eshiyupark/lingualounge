@@ -7,7 +7,7 @@
         <%= image_tag "https://th.bing.com/th/id/OIP.ZT-Tw8tYy38htqch69vsGQAAAA?pid=ImgDet&rs=1", class: "avatar-flex" %>
       <% end %>
       <div class="my-2">
-        <h2><%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></h2>
+        <h2 class="text-center"><%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></h2>
       </div>
       <%= link_to "Edit Profile", edit_user_registration_path, class: "btn-orange w-50" %>
     </div>
